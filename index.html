@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Дигитален Наръчник: AI Трансформация & Иновации 2026 (Pro Edition)</title>
-    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -25,15 +24,17 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     
-    <!-- Custom CSS Styles -->
     <style>
         body { font-family: 'Inter', sans-serif; }
         .glass { background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(12px); }
         .dark .glass { background: rgba(15, 23, 42, 0.85); backdrop-filter: blur(12px); }
         .custom-scrollbar::-webkit-scrollbar { width: 6px; height: 6px; }
         .custom-scrollbar::-webkit-scrollbar-track { background: rgba(0,0,0,0.05); border-radius: 4px; }
+        .dark .custom-scrollbar::-webkit-scrollbar-track { background: rgba(0,0,0,0.2); }
         .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(100,116,139,0.3); border-radius: 4px; }
+        .dark .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(100,116,139,0.5); }
         .gradient-text {
             background: linear-gradient(135deg, #2563eb 0%, #7c3aed 50%, #db2777 100%);
             -webkit-background-clip: text;
@@ -45,16 +46,26 @@
             to { opacity: 1; transform: translateY(0); }
         }
         .animate-fade-in { animation: fadeIn 0.4s ease-out forwards; }
+        .chat-content p { margin-bottom: 0.5rem; }
+        .chat-content p:last-child { margin-bottom: 0; }
+        .chat-content strong { font-weight: 700; color: inherit; }
+        .chat-content ul { list-style-type: disc; padding-left: 1rem; margin-bottom: 0.5rem; }
+        
+        /* Tabs Styling */
+        .tab-btn { transition: all 0.3s ease; }
+        .tab-btn.active { background-color: #2563eb; color: white; border-color: #2563eb; }
+        .dark .tab-btn.active { background-color: #3b82f6; color: white; border-color: #3b82f6; }
+        .tab-content { display: none; animation: fadeIn 0.3s ease-in-out forwards; }
+        .tab-content.active { display: block; }
     </style>
 </head>
-<body class="bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-100 transition-colors duration-300 min-h-screen flex flex-col custom-scrollbar">
+<body class="bg-slate-50 dark:bg-[#0a0f1c] text-slate-800 dark:text-slate-100 transition-colors duration-300 min-h-screen flex flex-col custom-scrollbar">
 
     <!-- Top Scroll Progress Line -->
     <div class="fixed top-0 left-0 w-full h-1 bg-slate-200 dark:bg-slate-800 z-50">
         <div id="scrollProgress" class="h-full gradient-bg w-0 transition-all duration-150"></div>
     </div>
 
-    <!-- Navigation Header -->
     <header class="sticky top-0 z-40 glass border-b border-slate-200 dark:border-slate-800 shadow-sm transition-colors">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
             <div class="flex items-center space-x-3">
@@ -91,14 +102,13 @@
     <!-- Main Container -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-1 w-full grid grid-cols-1 lg:grid-cols-12 gap-8">
         
-        <!-- Sidebar Navigation -->
         <aside class="lg:col-span-3 space-y-6">
             <div class="sticky top-24 space-y-6">
                 <div class="bg-white dark:bg-slate-900 rounded-2xl p-4 border border-slate-200 dark:border-slate-800 shadow-sm">
                     <h2 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3 px-2">Съдържание</h2>
                     <nav class="space-y-1" id="mainNav">
                         <a href="#intro" class="nav-link flex items-center gap-3 px-3 py-2 text-sm font-medium rounded-xl text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/50 transition-all">
-                            <i class="fa-solid fa-compass w-5 text-center"></i> Введение
+                            <i class="fa-solid fa-compass w-5 text-center"></i> Въведение
                         </a>
                         <a href="#module1" class="nav-link flex items-center gap-3 px-3 py-2 text-sm font-medium rounded-xl text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all">
                             <i class="fa-solid fa-layer-group w-5 text-center"></i> 1. Стратегия & Основи
@@ -119,10 +129,10 @@
                             <i class="fa-solid fa-chart-line w-5 text-center"></i> 6. ROI & Оценка
                         </a>
                         <a href="#interactive-hub" class="nav-link flex items-center gap-3 px-3 py-2 text-sm font-medium rounded-xl text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all">
-                            <i class="fa-solid fa-toolbox w-5 text-center text-amber-500"></i> Интерактивен Център
+                            <i class="fa-solid fa-toolbox w-5 text-center text-amber-500"></i> Prompt Studio
                         </a>
                         <a href="#promptLibrary" class="nav-link flex items-center gap-3 px-3 py-2 text-sm font-medium rounded-xl text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all">
-                            <i class="fa-solid fa-book-bookmark w-5 text-center text-purple-500"></i> Библиотека Промптове
+                            <i class="fa-solid fa-book-bookmark w-5 text-center text-purple-500"></i> Prompt Библиотека
                         </a>
                     </nav>
                 </div>
@@ -141,27 +151,46 @@
             </div>
         </aside>
 
-        <!-- Main Content Area -->
         <main class="lg:col-span-9 space-y-12" id="contentArea">
 
             <!-- INTRO -->
-            <section id="intro" class="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-10 border border-slate-200 dark:border-slate-800 shadow-sm relative overflow-hidden">
-                <div class="absolute -right-10 -top-10 w-60 h-60 gradient-bg opacity-10 rounded-full blur-3xl pointer-events-none"></div>
-                <div class="max-w-3xl space-y-6">
-                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 dark:bg-blue-900/40 text-blue-600 dark:text-blue-400 text-xs font-semibold border border-blue-200 dark:border-blue-800">
+            <section id="intro" class="scroll-mt-24 bg-slate-900 rounded-3xl p-6 sm:p-10 border border-slate-800 shadow-xl relative overflow-hidden">
+                <div class="absolute -right-10 -top-10 w-60 h-60 gradient-bg opacity-15 rounded-full blur-3xl pointer-events-none"></div>
+                <div class="max-w-3xl mx-auto text-center space-y-6 relative z-10">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-950/80 text-blue-400 text-xs font-semibold border border-blue-900">
                         <i class="fa-solid fa-rocket"></i> Официално Издание 2026 (Pro Edition)
                     </div>
                     <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight leading-tight">
-                        Навигатор за <span class="gradient-text">AI Трансформация</span>
+                        AI <span class="gradient-text">Навигация</span>
                     </h1>
-                    <p class="text-slate-600 dark:text-slate-300 text-base sm:text-lg leading-relaxed">
-                        Пълен интерактивен гид за внедряване на Generative AI, изграждане на промптове по PCTCO рамката, спазване на EU AI Act регулациите и пълна автоматизация на бизнес процесите чрез Make.com и Zapier.
-                    </p>
+                    
+                    <div class="text-slate-300 text-base sm:text-lg leading-relaxed">
+                        <p class="mb-4">Превърнете изкуствения интелект в най-силното си конкурентно предимство. Този интерактивен наръчник ще ви покаже как:</p>
+                        
+                        <ul class="inline-flex flex-col text-left space-y-2.5 text-sm sm:text-base">
+                            <li class="flex items-center gap-3">
+                                <i class="fa-solid fa-circle-check text-emerald-400"></i>
+                                <span>да автоматизирате рутинните задачи</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <i class="fa-solid fa-circle-check text-emerald-400"></i>
+                                <span>да намалите драстично разходите</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <i class="fa-solid fa-circle-check text-emerald-400"></i>
+                                <span>да скалирате бизнеса си светкавично</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <i class="fa-solid fa-circle-check text-emerald-400"></i>
+                                <span>без да се нуждаете от технически познания</span>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </section>
 
             <!-- MODULE 1 -->
-            <section id="module1" class="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-8 border border-slate-200 dark:border-slate-800 shadow-sm space-y-6">
+            <section id="module1" class="scroll-mt-24 bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-8 border border-slate-200 dark:border-slate-800 shadow-sm space-y-6">
                 <div class="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-4">
                     <div class="flex items-center gap-3">
                         <span class="w-10 h-10 rounded-xl bg-blue-100 dark:bg-blue-900/50 text-blue-600 dark:text-blue-400 flex items-center justify-center font-bold">1</span>
@@ -178,7 +207,7 @@
                 <div class="prose dark:prose-invert max-w-none text-sm leading-relaxed space-y-4">
                     <p>Успешното внедряване на AI изисква ясна бизнес стратегия. Вместо да се тестват инструменти без цел, организацията трябва да установи своите нужди и да идентифицира процесите с най-висока възвръщаемост (ROI).</p>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 my-6">
-                        <div class="p-5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/30 space-y-2">
+                        <div class="p-5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-[#0f172a] space-y-2">
                             <h3 class="font-bold text-slate-900 dark:text-white text-base flex items-center gap-2">
                                 <i class="fa-solid fa-bullseye text-blue-500"></i> Традиционен vs Generative AI
                             </h3>
@@ -187,7 +216,7 @@
                                 <li><b>Generative AI (LLMs):</b> Генерира нов текст, програмен код, медийно съдържание и води диалог (ChatGPT, Gemini).</li>
                             </ul>
                         </div>
-                        <div class="p-5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/30 space-y-2">
+                        <div class="p-5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-[#0f172a] space-y-2">
                             <h3 class="font-bold text-slate-900 dark:text-white text-base flex items-center gap-2">
                                 <i class="fa-solid fa-stairs text-purple-500"></i> 4-те Нива на AI Зрялост
                             </h3>
@@ -203,7 +232,7 @@
             </section>
 
             <!-- MODULE 2 -->
-            <section id="module2" class="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-8 border border-slate-200 dark:border-slate-800 shadow-sm space-y-6">
+            <section id="module2" class="scroll-mt-24 bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-8 border border-slate-200 dark:border-slate-800 shadow-sm space-y-6">
                 <div class="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-4">
                     <div class="flex items-center gap-3">
                         <span class="w-10 h-10 rounded-xl bg-purple-100 dark:bg-purple-900/50 text-purple-600 dark:text-purple-400 flex items-center justify-center font-bold">2</span>
@@ -220,7 +249,7 @@
                 <div class="prose dark:prose-invert max-w-none text-sm leading-relaxed space-y-4">
                     <p>Качеството на отговора зависи пряко от инструкцията. Използвайте <b>PCTCO рамката</b> за постигане на висока точност:</p>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div class="p-5 rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/40 space-y-3">
+                        <div class="p-5 rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-[#0f172a] space-y-3">
                             <span class="px-2.5 py-1 rounded bg-purple-100 dark:bg-purple-900/50 text-purple-700 dark:text-purple-300 font-bold text-xs uppercase border border-purple-200 dark:border-purple-800">PCTCO Структура</span>
                             <ul class="text-xs text-slate-600 dark:text-slate-300 space-y-2">
                                 <li><b>P (Persona):</b> Роля ("Ти си експерт...")</li>
@@ -230,7 +259,7 @@
                                 <li><b>O (Output):</b> Формат ("В таблица...")</li>
                             </ul>
                         </div>
-                        <div class="p-5 rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/40 space-y-3">
+                        <div class="p-5 rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-[#0f172a] space-y-3">
                             <span class="px-2.5 py-1 rounded bg-blue-100 dark:bg-blue-900/50 text-blue-700 dark:text-blue-300 font-bold text-xs uppercase border border-blue-200 dark:border-blue-800">Напреднали Техники</span>
                             <ul class="text-xs text-slate-600 dark:text-slate-300 space-y-2">
                                 <li><b>Few-Shot Prompting:</b> Подайте 2-3 точни примера за спазване на тон и стил.</li>
@@ -243,7 +272,7 @@
             </section>
 
             <!-- MODULE 3 -->
-            <section id="module3" class="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-8 border border-slate-200 dark:border-slate-800 shadow-sm space-y-6">
+            <section id="module3" class="scroll-mt-24 bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-8 border border-slate-200 dark:border-slate-800 shadow-sm space-y-6">
                 <div class="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-4">
                     <div class="flex items-center gap-3">
                         <span class="w-10 h-10 rounded-xl bg-emerald-100 dark:bg-emerald-900/50 text-emerald-600 dark:text-emerald-400 flex items-center justify-center font-bold">3</span>
@@ -258,12 +287,50 @@
                     </label>
                 </div>
                 <div class="prose dark:prose-invert max-w-none text-sm leading-relaxed space-y-4">
-                    <p>Автоматизирайте рутинните задачи чрез визуални no-code платформи. Make.com е идеален за сложни логики и API интеграции с OpenAI или Google Gemini, докато Zapier е по-лесен за бързи двустъпкови задачи.</p>
+                    <p>Автоматизирайте рутинните задачи чрез визуални no-code платформи. Чрез интегриране на различни инструменти, AI преминава от прост чатбот към автономен дигитален асистент, който работи във фонов режим.</p>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
+                        <!-- Make vs Zapier -->
+                        <div class="p-5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-[#0f172a] space-y-3">
+                            <h3 class="font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                                <i class="fa-solid fa-code-compare text-emerald-500"></i> Make.com vs Zapier
+                            </h3>
+                            <ul class="text-xs space-y-2 text-slate-600 dark:text-slate-300 list-disc list-inside">
+                                <li><b>Make.com:</b> Визуален, неограничени пътища, по-ниска цена. Идеален за сложни логики с разклонения (routers) и масова обработка на данни.</li>
+                                <li><b>Zapier:</b> По-висока цена, но изключително интуитивен и бърз за линейни автоматизации от тип "Ако стане А -> Направи Б". Има хиляди готови интеграции.</li>
+                            </ul>
+                        </div>
+
+                        <!-- Checklist -->
+                        <div class="p-5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-[#0f172a] space-y-3">
+                            <h3 class="font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                                <i class="fa-solid fa-list-check text-emerald-500"></i> Чеклист преди автоматизация
+                            </h3>
+                            <div class="space-y-2 text-xs text-slate-600 dark:text-slate-300">
+                                <label class="flex items-start gap-2 cursor-pointer group">
+                                    <input type="checkbox" class="mt-0.5 rounded text-emerald-600 focus:ring-emerald-500 bg-white dark:bg-slate-900 border-slate-300 dark:border-slate-700 cursor-pointer"> 
+                                    <span class="group-hover:text-slate-900 dark:group-hover:text-white transition-colors">Процесът е ясно дефиниран и повтаряем поне 5 пъти седмично.</span>
+                                </label>
+                                <label class="flex items-start gap-2 cursor-pointer group">
+                                    <input type="checkbox" class="mt-0.5 rounded text-emerald-600 focus:ring-emerald-500 bg-white dark:bg-slate-900 border-slate-300 dark:border-slate-700 cursor-pointer"> 
+                                    <span class="group-hover:text-slate-900 dark:group-hover:text-white transition-colors">Инструментите имат налични API ключове или Webhooks.</span>
+                                </label>
+                                <label class="flex items-start gap-2 cursor-pointer group">
+                                    <input type="checkbox" class="mt-0.5 rounded text-emerald-600 focus:ring-emerald-500 bg-white dark:bg-slate-900 border-slate-300 dark:border-slate-700 cursor-pointer"> 
+                                    <span class="group-hover:text-slate-900 dark:group-hover:text-white transition-colors">Няма риск от изтичане на високочувствителни фирмени данни.</span>
+                                </label>
+                                <label class="flex items-start gap-2 cursor-pointer group">
+                                    <input type="checkbox" class="mt-0.5 rounded text-emerald-600 focus:ring-emerald-500 bg-white dark:bg-slate-900 border-slate-300 dark:border-slate-700 cursor-pointer"> 
+                                    <span class="group-hover:text-slate-900 dark:group-hover:text-white transition-colors">Предвиден е "човешки филтър" (human-in-the-loop) за крайно одобрение.</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </section>
 
             <!-- MODULE 4 -->
-            <section id="module4" class="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-8 border border-slate-200 dark:border-slate-800 shadow-sm space-y-6">
+            <section id="module4" class="scroll-mt-24 bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-8 border border-slate-200 dark:border-slate-800 shadow-sm space-y-6">
                 <div class="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-4">
                     <div class="flex items-center gap-3">
                         <span class="w-10 h-10 rounded-xl bg-amber-100 dark:bg-amber-900/50 text-amber-600 dark:text-amber-400 flex items-center justify-center font-bold">4</span>
@@ -278,12 +345,49 @@
                     </label>
                 </div>
                 <div class="prose dark:prose-invert max-w-none text-sm leading-relaxed space-y-4">
-                    <p>Успехът на AI зависи 80% от хората. Премахнете безпокойството в екипа (страх от загуба на работа), изградете вътрешна база от знания (като Prompt Library) и определете "AI Champions" - ентусиазирани служители, които да обучават останалите.</p>
+                    <p>Най-голямата пречка пред AI трансформацията не е технологията, а съпротивата на хората. Служителите често изпитват страх, че ще бъдат заменени, или липса на мотивация да учат нови системи.</p>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
+                        <!-- Framework -->
+                        <div class="p-5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-[#0f172a] space-y-3">
+                            <h3 class="font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                                <i class="fa-solid fa-users text-amber-500"></i> План за Внедряване
+                            </h3>
+                            <ol class="text-xs space-y-2 text-slate-600 dark:text-slate-300 list-decimal list-inside">
+                                <li><b>Прозрачна комуникация:</b> Обяснете ясно, че целта на AI е да поеме рутината, за да освободи време за креативна работа, а не да съкращава персонал.</li>
+                                <li><b>AI Шампиони:</b> Идентифицирайте 1-2 технологично отворени служители във всеки отдел. Нека те първи тестват и разпространяват добрите практики.</li>
+                                <li><b>Регулярни Workshops:</b> Организирайте кратки 30-минутни сесии седмично, където екипът споделя най-добрите си промптове.</li>
+                            </ol>
+                        </div>
+
+                        <!-- Quiz -->
+                        <div class="p-5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-[#0f172a] space-y-3">
+                            <h3 class="font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                                <i class="fa-solid fa-clipboard-question text-amber-500"></i> Тест: Готов ли е екипът?
+                            </h3>
+                            <div class="text-xs text-slate-600 dark:text-slate-300 space-y-4">
+                                <div class="space-y-1.5">
+                                    <p class="font-medium text-slate-800 dark:text-slate-200">1. Имате ли ясно разписана AI политика (какво е разрешено)?</p>
+                                    <div class="flex gap-4">
+                                        <label class="flex items-center gap-1 cursor-pointer hover:text-amber-500"><input type="radio" name="quiz1" class="text-amber-600 focus:ring-amber-500 bg-white dark:bg-slate-900 border-slate-300 dark:border-slate-700"> Да</label>
+                                        <label class="flex items-center gap-1 cursor-pointer hover:text-amber-500"><input type="radio" name="quiz1" class="text-amber-600 focus:ring-amber-500 bg-white dark:bg-slate-900 border-slate-300 dark:border-slate-700"> Не (Спешен приоритет)</label>
+                                    </div>
+                                </div>
+                                <div class="space-y-1.5 border-t border-slate-200 dark:border-slate-700/50 pt-2">
+                                    <p class="font-medium text-slate-800 dark:text-slate-200">2. Служителите споделят ли открито кога ползват ChatGPT?</p>
+                                    <div class="flex gap-4">
+                                        <label class="flex items-center gap-1 cursor-pointer hover:text-amber-500"><input type="radio" name="quiz2" class="text-amber-600 focus:ring-amber-500 bg-white dark:bg-slate-900 border-slate-300 dark:border-slate-700"> Да</label>
+                                        <label class="flex items-center gap-1 cursor-pointer hover:text-amber-500"><input type="radio" name="quiz2" class="text-amber-600 focus:ring-amber-500 bg-white dark:bg-slate-900 border-slate-300 dark:border-slate-700"> Не (Скрит, "Shadow AI")</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </section>
 
             <!-- MODULE 5 -->
-            <section id="module5" class="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-8 border border-slate-200 dark:border-slate-800 shadow-sm space-y-6">
+            <section id="module5" class="scroll-mt-24 bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-8 border border-slate-200 dark:border-slate-800 shadow-sm space-y-6">
                 <div class="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-4">
                     <div class="flex items-center gap-3">
                         <span class="w-10 h-10 rounded-xl bg-rose-100 dark:bg-rose-900/50 text-rose-600 dark:text-rose-400 flex items-center justify-center font-bold">5</span>
@@ -298,12 +402,38 @@
                     </label>
                 </div>
                 <div class="prose dark:prose-invert max-w-none text-sm leading-relaxed space-y-4">
-                    <p>Запознайте се с категориите риск според европейския регламент EU AI Act (от минимален до неприемлив риск). Основно правило: Никога не въвеждайте лични данни (ЕГН, имена на клиенти) или търговски тайни в публични AI модели като базовата версия на ChatGPT.</p>
+                    <p>Сигурността на данните е критична. Основно златно правило: <b>Никога не въвеждайте лични данни (ЕГН, имена на клиенти, договори) или търговски тайни в публични AI модели</b> като базовата безплатна версия на ChatGPT, тъй като те се използват за трениране на модела.</p>
+                    
+                    <div class="mt-8 space-y-4">
+                        <h3 class="font-bold text-slate-900 dark:text-white text-base flex items-center gap-2">
+                            <i class="fa-solid fa-scale-balanced text-rose-500"></i> EU AI Act: 4-те Нива на Риск
+                        </h3>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 mb-2">Новият европейски закон разделя AI системите спрямо тяхното влияние върху обществото:</p>
+                        
+                        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3">
+                            <div class="p-4 rounded-xl border border-rose-200 dark:border-rose-900/50 bg-rose-50 dark:bg-rose-950/20 text-center space-y-2 transition-transform hover:-translate-y-1">
+                                <div class="text-rose-600 dark:text-rose-400 font-extrabold text-xs uppercase tracking-wider">Неприемлив</div>
+                                <div class="text-[11px] text-slate-600 dark:text-slate-400 leading-tight">Social scoring, подсъзнателна манипулация. <br><span class="font-bold text-rose-600 dark:text-rose-400">Напълно забранени.</span></div>
+                            </div>
+                            <div class="p-4 rounded-xl border border-orange-200 dark:border-orange-900/50 bg-orange-50 dark:bg-orange-950/20 text-center space-y-2 transition-transform hover:-translate-y-1">
+                                <div class="text-orange-600 dark:text-orange-400 font-extrabold text-xs uppercase tracking-wider">Висок</div>
+                                <div class="text-[11px] text-slate-600 dark:text-slate-400 leading-tight">HR филтри за CV-та, биометрия, здраве. <br><span class="font-bold text-orange-600 dark:text-orange-400">Строг одит и контрол.</span></div>
+                            </div>
+                            <div class="p-4 rounded-xl border border-amber-200 dark:border-amber-900/50 bg-amber-50 dark:bg-amber-950/20 text-center space-y-2 transition-transform hover:-translate-y-1">
+                                <div class="text-amber-600 dark:text-amber-400 font-extrabold text-xs uppercase tracking-wider">Ограничен</div>
+                                <div class="text-[11px] text-slate-600 dark:text-slate-400 leading-tight">Чатботове, Deepfakes, генерация на текст. <br><span class="font-bold text-amber-600 dark:text-amber-400">Изискват ясна прозрачност.</span></div>
+                            </div>
+                            <div class="p-4 rounded-xl border border-emerald-200 dark:border-emerald-900/50 bg-emerald-50 dark:bg-emerald-950/20 text-center space-y-2 transition-transform hover:-translate-y-1">
+                                <div class="text-emerald-600 dark:text-emerald-400 font-extrabold text-xs uppercase tracking-wider">Минимален</div>
+                                <div class="text-[11px] text-slate-600 dark:text-slate-400 leading-tight">Спам филтри, видео игри, инвентар. <br><span class="font-bold text-emerald-600 dark:text-emerald-400">Без специални регулации.</span></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </section>
 
             <!-- MODULE 6 -->
-            <section id="module6" class="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-8 border border-slate-200 dark:border-slate-800 shadow-sm space-y-6">
+            <section id="module6" class="scroll-mt-24 bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-8 border border-slate-200 dark:border-slate-800 shadow-sm space-y-6">
                 <div class="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-4">
                     <div class="flex items-center gap-3">
                         <span class="w-10 h-10 rounded-xl bg-cyan-100 dark:bg-cyan-900/50 text-cyan-600 dark:text-cyan-400 flex items-center justify-center font-bold">6</span>
@@ -318,42 +448,99 @@
                     </label>
                 </div>
                 <div class="prose dark:prose-invert max-w-none text-sm leading-relaxed space-y-4">
-                    <p>Изчислявайте финансовата възвръщаемост. Формула: (Спестени часове месечно * Часова ставка на служителя) - Месечна цена на AI софтуера = Чисто спестяване за бизнеса.</p>
+                    <p>Имплементирането на AI трябва да носи измерими бизнес резултати. Не инвестирайте в инструменти, които не решават конкретен проблем и не пестят време или пари.</p>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
+                        <!-- ROI Calculator -->
+                        <div class="p-6 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#0f172a] space-y-6 shadow-sm">
+                            <h3 class="font-bold text-slate-900 dark:text-white flex items-center gap-2 text-base">
+                                <i class="fa-solid fa-calculator text-cyan-500"></i> Примерна Формула за ROI
+                            </h3>
+                            <div class="text-sm space-y-3">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-slate-600 dark:text-slate-400">Спестени часове (на месец):</span>
+                                    <span class="text-cyan-600 dark:text-cyan-400 font-bold">20 ч.</span>
+                                </div>
+                                <div class="flex justify-between items-center pb-3 border-b border-slate-100 dark:border-slate-700/50">
+                                    <span class="text-slate-600 dark:text-slate-400">Средна часова ставка:</span>
+                                    <span class="text-cyan-600 dark:text-cyan-400 font-bold">€15 / ч.</span>
+                                </div>
+                                <div class="flex justify-between items-center text-slate-900 dark:text-white pt-1">
+                                    <span>Брутно спестяване:</span>
+                                    <span class="font-bold">€300</span>
+                                </div>
+                                <div class="flex justify-between items-center text-rose-500 pb-3 border-b border-slate-100 dark:border-slate-700/50">
+                                    <span>Цена на AI софтуер (напр. Plus):</span>
+                                    <span>- €20</span>
+                                </div>
+                                <div class="flex justify-between items-center pt-2">
+                                    <span class="font-bold text-slate-900 dark:text-white uppercase tracking-wider text-xs">Чист Месечен ROI:</span>
+                                    <span class="text-emerald-500 font-extrabold text-lg">+€280</span>
+                                </div>
+                            </div>
+                            <p class="text-[11px] text-slate-500 dark:text-slate-500">* Сметката е за един служител. Умножете по броя на екипа.</p>
+                        </div>
+
+                        <!-- KPIs -->
+                        <div class="p-6 rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-[#0f172a] space-y-6 shadow-sm">
+                            <h3 class="font-bold text-slate-900 dark:text-white flex items-center gap-2 text-base">
+                                <i class="fa-solid fa-chart-pie text-cyan-500"></i> Ключови Метрики (KPIs)
+                            </h3>
+                            <ul class="text-sm space-y-4 text-slate-600 dark:text-slate-300 list-none">
+                                <li class="flex items-start gap-3">
+                                    <i class="fa-solid fa-arrow-trend-down text-emerald-500 mt-1"></i>
+                                    <span class="leading-relaxed"><b>Lead Time:</b> Намаляване на времето от заявка до готов резултат (напр. от 4 часа за статия на 30 минути).</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <i class="fa-regular fa-circle-dot text-emerald-500 mt-1"></i>
+                                    <span class="leading-relaxed"><b>Качество (Error Rate):</b> Процент намаляване на правописни, фактологични или логически грешки.</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <i class="fa-solid fa-bolt text-emerald-500 mt-1"></i>
+                                    <span class="leading-relaxed"><b>Обем (Output):</b> Брой нови генерирани маркетинг кампании, дизайни или лидове на седмица.</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <i class="fa-regular fa-face-smile text-emerald-500 mt-1"></i>
+                                    <span class="leading-relaxed"><b>Удовлетвореност (eNPS):</b> По-малко бърнаут и по-щастливи служители без досадна рутина.</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </section>
 
             <!-- INTERACTIVE HUB -->
-            <section id="interactive-hub" class="bg-slate-900 text-white rounded-3xl p-6 sm:p-10 space-y-8 shadow-xl border border-slate-800">
+            <section id="interactive-hub" class="scroll-mt-24 bg-slate-900 text-white rounded-3xl p-6 sm:p-10 space-y-8 shadow-xl border border-slate-800">
                 <div class="border-b border-slate-800 pb-4">
                     <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/20 text-amber-400 text-xs font-semibold mb-2">
                         <i class="fa-solid fa-wand-magic-sparkles"></i> Практически Инструментариум
                     </div>
-                    <h2 class="text-2xl sm:text-3xl font-extrabold">Интерактивен Център</h2>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold">Prompt Studio</h2>
                 </div>
 
                 <!-- Prompt Studio Generator -->
                 <div class="bg-slate-950 rounded-2xl p-6 border border-slate-800 space-y-4 shadow-inner">
                     <h3 class="text-lg font-bold flex items-center gap-2 text-amber-400">
-                        <i class="fa-solid fa-terminal"></i> Генератор на Професионални Промптове (Pro Неограничено)
+                        <i class="fa-solid fa-terminal"></i> >_ Интерактивен Генератор (Pro Неограничено)
                     </h3>
                     <p class="text-xs text-slate-400">Попълнете нивата по-долу, за да сглобите перфектен PCTCO промпт:</p>
                     
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
                         <div>
                             <label class="block font-medium mb-1 text-slate-400">Роля (Persona)</label>
-                            <input type="text" id="promptRole" placeholder="напр. Старши Дигитален Маркетолог" class="w-full p-2.5 bg-slate-900 border border-slate-700 rounded-lg text-white">
+                            <input type="text" id="promptRole" placeholder="напр. Старши Дигитален Маркетолог" class="w-full p-2.5 bg-slate-900 border border-slate-700 rounded-lg text-white focus:border-blue-500 focus:outline-none transition-colors">
                         </div>
                         <div>
                             <label class="block font-medium mb-1 text-slate-400">Контекст (Context)</label>
-                            <input type="text" id="promptContext" placeholder="напр. Стартиране на нов онлайн магазин" class="w-full p-2.5 bg-slate-900 border border-slate-700 rounded-lg text-white">
+                            <input type="text" id="promptContext" placeholder="напр. Стартиране на нов онлайн магазин" class="w-full p-2.5 bg-slate-900 border border-slate-700 rounded-lg text-white focus:border-blue-500 focus:outline-none transition-colors">
                         </div>
                         <div>
                             <label class="block font-medium mb-1 text-slate-400">Основна Задача (Task)</label>
-                            <input type="text" id="promptTask" placeholder="напр. Създай 5 идеи за съдържание" class="w-full p-2.5 bg-slate-900 border border-slate-700 rounded-lg text-white">
+                            <input type="text" id="promptTask" placeholder="напр. Създай 5 идеи за съдържание" class="w-full p-2.5 bg-slate-900 border border-slate-700 rounded-lg text-white focus:border-blue-500 focus:outline-none transition-colors">
                         </div>
                         <div>
                             <label class="block font-medium mb-1 text-slate-400">Ограничения & Формат</label>
-                            <input type="text" id="promptOutput" placeholder="напр. Форматирай като списък" class="w-full p-2.5 bg-slate-900 border border-slate-700 rounded-lg text-white">
+                            <input type="text" id="promptOutput" placeholder="напр. Форматирай като списък" class="w-full p-2.5 bg-slate-900 border border-slate-700 rounded-lg text-white focus:border-blue-500 focus:outline-none transition-colors">
                         </div>
                     </div>
 
@@ -383,228 +570,220 @@
                 </div>
             </section>
 
-            <!-- FULL 35+ PROMPT LIBRARY SECTION -->
-            <section id="promptLibrary" class="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-8 border border-slate-200 dark:border-slate-800 shadow-sm space-y-8">
-                <div class="border-b border-slate-100 dark:border-slate-800 pb-4 flex flex-col sm:flex-row justify-between sm:items-end gap-4">
-                    <div>
-                        <span class="text-xs font-bold px-2.5 py-1 rounded bg-purple-100 dark:bg-purple-900/50 text-purple-600 dark:text-purple-300 border border-purple-200 dark:border-purple-800">Pro & VIP База Данни</span>
-                        <h2 class="text-2xl font-extrabold mt-3">База данни с Готови Бизнес Промптове (35+)</h2>
-                        <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Копирайте директно с един клик. Промптовете са форматирани по PCTCO рамката.</p>
-                    </div>
+            <!-- FULL 40 PROMPT LIBRARY SECTION WITH TABS -->
+            <section id="promptLibrary" class="scroll-mt-24 bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-8 border border-slate-200 dark:border-slate-800 shadow-sm space-y-6">
+                <div class="border-b border-slate-100 dark:border-slate-800 pb-4">
+                    <h2 class="text-2xl font-extrabold text-slate-900 dark:text-white">Prompt Библиотека</h2>
+                    <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Копирайте директно с един клик. Промптовете са форматирани по PCTCO рамката.</p>
                 </div>
 
-                <!-- CATEGORY 1: MARKETING -->
-                <div class="space-y-4">
-                    <h3 class="text-lg font-bold text-blue-600 dark:text-blue-400 border-b border-slate-100 dark:border-slate-800 pb-2"><i class="fa-solid fa-bullhorn mr-2"></i> 1. Маркетинг & Съдържание (SEO, Copywriting)</h3>
+                <!-- Tabs Navigation -->
+                <div class="flex space-x-2 overflow-x-auto custom-scrollbar pb-2 border-b border-slate-200 dark:border-slate-800">
+                    <button class="tab-btn active px-4 py-2 rounded-lg text-sm font-semibold border border-slate-200 dark:border-slate-700 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 whitespace-nowrap" data-target="tab-marketing"><i class="fa-solid fa-bullhorn mr-1.5"></i> Маркетинг</button>
+                    <button class="tab-btn px-4 py-2 rounded-lg text-sm font-semibold border border-slate-200 dark:border-slate-700 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 whitespace-nowrap" data-target="tab-sales"><i class="fa-solid fa-handshake mr-1.5"></i> Продажби</button>
+                    <button class="tab-btn px-4 py-2 rounded-lg text-sm font-semibold border border-slate-200 dark:border-slate-700 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 whitespace-nowrap" data-target="tab-hr"><i class="fa-solid fa-users mr-1.5"></i> HR & Мениджмънт</button>
+                    <button class="tab-btn px-4 py-2 rounded-lg text-sm font-semibold border border-slate-200 dark:border-slate-700 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 whitespace-nowrap" data-target="tab-tech"><i class="fa-solid fa-microchip mr-1.5"></i> Tech & Auto</button>
+                    <button class="tab-btn px-4 py-2 rounded-lg text-sm font-semibold border border-slate-200 dark:border-slate-700 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 whitespace-nowrap" data-target="tab-strategy"><i class="fa-solid fa-chess-knight mr-1.5"></i> Стратегия</button>
+                    <button class="tab-btn px-4 py-2 rounded-lg text-sm font-semibold border border-slate-200 dark:border-slate-700 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 whitespace-nowrap" data-target="tab-creatives"><i class="fa-solid fa-palette mr-1.5"></i> Креативни</button>
+                </div>
+
+                <!-- TAB CONTENT: MARKETING -->
+                <div id="tab-marketing" class="tab-content active pt-4">
                     <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 text-xs">
-                        <!-- Prompt 1 -->
-                        <div class="p-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50 space-y-2">
-                            <div class="flex justify-between items-center"><span class="font-bold text-slate-800 dark:text-slate-200">1. SEO Мета Данни (Заглавия & Описания)</span><button onclick="copyLibraryPrompt(this)" class="text-slate-500 hover:text-blue-500 p-1 bg-white dark:bg-slate-900 rounded"><i class="fa-regular fa-copy"></i></button></div>
+                        <div class="p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-[#0f172a] space-y-2">
+                            <div class="flex justify-between items-center"><span class="font-bold text-slate-800 dark:text-white">1. SEO Мета Данни (Заглавия & Описания)</span><button onclick="copyLibraryPrompt(this)" class="text-slate-500 hover:text-blue-500 p-1 bg-white dark:bg-slate-800 rounded transition-colors"><i class="fa-regular fa-copy"></i></button></div>
                             <p class="font-mono text-slate-600 dark:text-slate-400 text-[11px] bg-white dark:bg-slate-950 p-2.5 rounded border border-slate-200 dark:border-slate-800 leading-relaxed">[РОЛЯ]: Ти си експерт по SEO и дигитален маркетинг. [КОНТЕКСТ]: Пиша блог статия на тема [ТЕМА]. [ЗАДАЧА]: Напиши 5 варианта за мета заглавие (до 60 символа) и 3 варианта за мета описание (до 155 символа). [ОГРАНИЧЕНИЯ]: Включи ключовата дума [КЛЮЧОВА ДУМА]. [ФОРМАТ]: Списък.</p>
                         </div>
-                        <!-- Prompt 2 -->
-                        <div class="p-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50 space-y-2">
-                            <div class="flex justify-between items-center"><span class="font-bold text-slate-800 dark:text-slate-200">2. План за Блог Статия</span><button onclick="copyLibraryPrompt(this)" class="text-slate-500 hover:text-blue-500 p-1 bg-white dark:bg-slate-900 rounded"><i class="fa-regular fa-copy"></i></button></div>
+                        <div class="p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-[#0f172a] space-y-2">
+                            <div class="flex justify-between items-center"><span class="font-bold text-slate-800 dark:text-white">2. План за Блог Статия</span><button onclick="copyLibraryPrompt(this)" class="text-slate-500 hover:text-blue-500 p-1 bg-white dark:bg-slate-800 rounded transition-colors"><i class="fa-regular fa-copy"></i></button></div>
                             <p class="font-mono text-slate-600 dark:text-slate-400 text-[11px] bg-white dark:bg-slate-950 p-2.5 rounded border border-slate-200 dark:border-slate-800 leading-relaxed">[РОЛЯ]: Ти си главен редактор. [КОНТЕКСТ]: Нашият блог е за [АУДИТОРИЯ]. [ЗАДАЧА]: Създай подробен outline (структура) за статия със заглавие [ЗАГЛАВИЕ]. [ОГРАНИЧЕНИЯ]: Включи H2 и H3 подзаглавия и идеи за вътрешни линкове. [ФОРМАТ]: Структуриран outline.</p>
                         </div>
-                        <!-- Prompt 3 -->
-                        <div class="p-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50 space-y-2">
-                            <div class="flex justify-between items-center"><span class="font-bold text-slate-800 dark:text-slate-200">3. Календар за Социални Мрежи (1 Месец)</span><button onclick="copyLibraryPrompt(this)" class="text-slate-500 hover:text-blue-500 p-1 bg-white dark:bg-slate-900 rounded"><i class="fa-regular fa-copy"></i></button></div>
-                            <p class="font-mono text-slate-600 dark:text-slate-400 text-[11px] bg-white dark:bg-slate-950 p-2.5 rounded border border-slate-200 dark:border-slate-800 leading-relaxed">[РОЛЯ]: Ти си Social Media Manager. [КОНТЕКСТ]: Продаваме [ПРОДУКТ] на [ЦЕЛЕВА ГРУПА]. [ЗАДАЧА]: Създай съдържателен календар за 1 месец с 3 поста седмично. [ОГРАНИЧЕНИЯ]: Миксирай образователни, забавни и продаващи постове. [ФОРМАТ]: Markdown таблица (Ден, Тема, Формат, Кратко описание).</p>
+                        <div class="p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-[#0f172a] space-y-2">
+                            <div class="flex justify-between items-center"><span class="font-bold text-slate-800 dark:text-white">3. Календар за Социални Мрежи</span><button onclick="copyLibraryPrompt(this)" class="text-slate-500 hover:text-blue-500 p-1 bg-white dark:bg-slate-800 rounded transition-colors"><i class="fa-regular fa-copy"></i></button></div>
+                            <p class="font-mono text-slate-600 dark:text-slate-400 text-[11px] bg-white dark:bg-slate-950 p-2.5 rounded border border-slate-200 dark:border-slate-800 leading-relaxed">[РОЛЯ]: Ти си Social Media Manager. [КОНТЕКСТ]: Продаваме [ПРОДУКТ] на [ЦЕЛЕВА ГРУПА]. [ЗАДАЧА]: Създай съдържателен календар за 1 месец с 3 поста седмично. [ОГРАНИЧЕНИЯ]: Миксирай образователни, забавни и продаващи постове. [ФОРМАТ]: Таблица (Ден, Тема, Формат, Описание).</p>
                         </div>
-                        <!-- Prompt 4 -->
-                        <div class="p-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50 space-y-2">
-                            <div class="flex justify-between items-center"><span class="font-bold text-slate-800 dark:text-slate-200">4. Текст за Facebook Реклама (A/B Тест)</span><button onclick="copyLibraryPrompt(this)" class="text-slate-500 hover:text-blue-500 p-1 bg-white dark:bg-slate-900 rounded"><i class="fa-regular fa-copy"></i></button></div>
-                            <p class="font-mono text-slate-600 dark:text-slate-400 text-[11px] bg-white dark:bg-slate-950 p-2.5 rounded border border-slate-200 dark:border-slate-800 leading-relaxed">[РОЛЯ]: Ти си Senior Copywriter. [КОНТЕКСТ]: Пускаме нова кампания за [ОФЕРТА]. [ЗАДАЧА]: Напиши 3 различни варианта за рекламен текст за Facebook. [ОГРАНИЧЕНИЯ]: Използвай AIDA (Attention, Interest, Desire, Action) формулата. Добави емоджита. [ФОРМАТ]: Ясно разделени 3 варианта.</p>
+                        <div class="p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-[#0f172a] space-y-2">
+                            <div class="flex justify-between items-center"><span class="font-bold text-slate-800 dark:text-white">4. Текст за Facebook Реклама</span><button onclick="copyLibraryPrompt(this)" class="text-slate-500 hover:text-blue-500 p-1 bg-white dark:bg-slate-800 rounded transition-colors"><i class="fa-regular fa-copy"></i></button></div>
+                            <p class="font-mono text-slate-600 dark:text-slate-400 text-[11px] bg-white dark:bg-slate-950 p-2.5 rounded border border-slate-200 dark:border-slate-800 leading-relaxed">[РОЛЯ]: Ти си Senior Copywriter. [КОНТЕКСТ]: Пускаме нова кампания за [ОФЕРТА]. [ЗАДАЧА]: Напиши 3 различни варианта за рекламен текст за Facebook. [ОГРАНИЧЕНИЯ]: Използвай AIDA формулата. Добави емоджита. [ФОРМАТ]: Ясно разделени 3 варианта.</p>
                         </div>
-                        <!-- Prompt 5 -->
-                        <div class="p-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50 space-y-2">
-                            <div class="flex justify-between items-center"><span class="font-bold text-slate-800 dark:text-slate-200">5. Имейл Нюзлетър (Newsletter)</span><button onclick="copyLibraryPrompt(this)" class="text-slate-500 hover:text-blue-500 p-1 bg-white dark:bg-slate-900 rounded"><i class="fa-regular fa-copy"></i></button></div>
-                            <p class="font-mono text-slate-600 dark:text-slate-400 text-[11px] bg-white dark:bg-slate-950 p-2.5 rounded border border-slate-200 dark:border-slate-800 leading-relaxed">[РОЛЯ]: Ти си експерт по Email Marketing. [КОНТЕКСТ]: Пращаме седмичен бюлетин до абонатите. [ЗАДАЧА]: Напиши ангажиращ имейл, който представя нашия нов [РЕСУРС/СТАТИЯ]. [ОГРАНИЧЕНИЯ]: Тонът да е приятелски. Завърши с ясен Call-to-Action. [ФОРМАТ]: Предмет на имейла + Тяло на текста.</p>
+                        <div class="p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-[#0f172a] space-y-2">
+                            <div class="flex justify-between items-center"><span class="font-bold text-slate-800 dark:text-white">5. Имейл Нюзлетър</span><button onclick="copyLibraryPrompt(this)" class="text-slate-500 hover:text-blue-500 p-1 bg-white dark:bg-slate-800 rounded transition-colors"><i class="fa-regular fa-copy"></i></button></div>
+                            <p class="font-mono text-slate-600 dark:text-slate-400 text-[11px] bg-white dark:bg-slate-950 p-2.5 rounded border border-slate-200 dark:border-slate-800 leading-relaxed">[РОЛЯ]: Ти си експерт по Email Marketing. [КОНТЕКСТ]: Пращаме седмичен бюлетин. [ЗАДАЧА]: Напиши ангажиращ имейл, който представя новия ни [ПРОДУКТ]. [ОГРАНИЧЕНИЯ]: Тонът да е приятелски. Завърши с ясен CTA. [ФОРМАТ]: Предмет + Тяло на текста.</p>
                         </div>
-                        <!-- Prompt 6 -->
-                        <div class="p-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50 space-y-2">
-                            <div class="flex justify-between items-center"><span class="font-bold text-slate-800 dark:text-slate-200">6. Анализ на Целева Аудитория (Persona)</span><button onclick="copyLibraryPrompt(this)" class="text-slate-500 hover:text-blue-500 p-1 bg-white dark:bg-slate-900 rounded"><i class="fa-regular fa-copy"></i></button></div>
-                            <p class="font-mono text-slate-600 dark:text-slate-400 text-[11px] bg-white dark:bg-slate-950 p-2.5 rounded border border-slate-200 dark:border-slate-800 leading-relaxed">[РОЛЯ]: Ти си маркетинг стратег. [КОНТЕКСТ]: Нашият продукт е [ОПИСАНИЕ]. [ЗАДАЧА]: Създай подробен профил на идеалния клиент (Buyer Persona). [ОГРАНИЧЕНИЯ]: Включи демография, психография, болки, цели и канали за информиране. [ФОРМАТ]: Разделен на секции с булети.</p>
+                        <div class="p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-[#0f172a] space-y-2">
+                            <div class="flex justify-between items-center"><span class="font-bold text-slate-800 dark:text-white">6. Анализ на Целева Аудитория</span><button onclick="copyLibraryPrompt(this)" class="text-slate-500 hover:text-blue-500 p-1 bg-white dark:bg-slate-800 rounded transition-colors"><i class="fa-regular fa-copy"></i></button></div>
+                            <p class="font-mono text-slate-600 dark:text-slate-400 text-[11px] bg-white dark:bg-slate-950 p-2.5 rounded border border-slate-200 dark:border-slate-800 leading-relaxed">[РОЛЯ]: Ти си маркетинг стратег. [КОНТЕКСТ]: Продуктът е [ОПИСАНИЕ]. [ЗАДАЧА]: Създай профил на идеалния клиент (Buyer Persona). [ОГРАНИЧЕНИЯ]: Включи демография, болки, цели. [ФОРМАТ]: Списък с булети.</p>
                         </div>
-                        <!-- Prompt 7 -->
-                        <div class="p-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50 space-y-2">
-                            <div class="flex justify-between items-center"><span class="font-bold text-slate-800 dark:text-slate-200">7. Продуктово Описание за eCommerce</span><button onclick="copyLibraryPrompt(this)" class="text-slate-500 hover:text-blue-500 p-1 bg-white dark:bg-slate-900 rounded"><i class="fa-regular fa-copy"></i></button></div>
-                            <p class="font-mono text-slate-600 dark:text-slate-400 text-[11px] bg-white dark:bg-slate-950 p-2.5 rounded border border-slate-200 dark:border-slate-800 leading-relaxed">[РОЛЯ]: Ти си копирайтър за онлайн магазини. [КОНТЕКСТ]: Продуктът е [ИМЕ И ДЕТАЙЛИ]. [ЗАДАЧА]: Напиши продуктово описание, което продава ползи, а не само характеристики. [ОГРАНИЧЕНИЯ]: До 150 думи. Включи 3 основни предимства на булети. [ФОРМАТ]: HTML или обикновен текст.</p>
+                        <div class="p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-[#0f172a] space-y-2">
+                            <div class="flex justify-between items-center"><span class="font-bold text-slate-800 dark:text-white">7. YouTube Видео Сценарий</span><button onclick="copyLibraryPrompt(this)" class="text-slate-500 hover:text-blue-500 p-1 bg-white dark:bg-slate-800 rounded transition-colors"><i class="fa-regular fa-copy"></i></button></div>
+                            <p class="font-mono text-slate-600 dark:text-slate-400 text-[11px] bg-white dark:bg-slate-950 p-2.5 rounded border border-slate-200 dark:border-slate-800 leading-relaxed">[РОЛЯ]: Ти си YouTube продуцент. [КОНТЕКСТ]: Темата е [ТЕМА]. [ЗАДАЧА]: Напиши сценарий за 5-минутно видео. [ОГРАНИЧЕНИЯ]: Силна кука (hook) в първите 10 сек. [ФОРМАТ]: Таблица (Време, Визуално, Аудио).</p>
                         </div>
                     </div>
                 </div>
 
-                <!-- CATEGORY 2: SALES -->
-                <div class="space-y-4">
-                    <h3 class="text-lg font-bold text-emerald-600 dark:text-emerald-400 border-b border-slate-100 dark:border-slate-800 pb-2"><i class="fa-solid fa-handshake mr-2"></i> 2. Продажби & Комуникация (Outreach, B2B)</h3>
+                <!-- TAB CONTENT: SALES -->
+                <div id="tab-sales" class="tab-content hidden pt-4">
                     <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 text-xs">
-                        <!-- Prompt 8 -->
-                        <div class="p-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50 space-y-2">
-                            <div class="flex justify-between items-center"><span class="font-bold text-slate-800 dark:text-slate-200">8. Cold Email Outreach (Студен Имейл)</span><button onclick="copyLibraryPrompt(this)" class="text-slate-500 hover:text-emerald-500 p-1 bg-white dark:bg-slate-900 rounded"><i class="fa-regular fa-copy"></i></button></div>
-                            <p class="font-mono text-slate-600 dark:text-slate-400 text-[11px] bg-white dark:bg-slate-950 p-2.5 rounded border border-slate-200 dark:border-slate-800 leading-relaxed">[РОЛЯ]: Ти си B2B Sales експерт. [КОНТЕКСТ]: Искам да предложа [УСЛУГА] на [ЦЕЛЕВА КОМПАНИЯ]. [ЗАДАЧА]: Напиши кратък, не-спами студен имейл. [ОГРАНИЧЕНИЯ]: Фокусирай се върху техен проблем, който решаваме. Нека е под 100 думи. [ФОРМАТ]: Предмет + Текст.</p>
+                        <div class="p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-[#0f172a] space-y-2">
+                            <div class="flex justify-between items-center"><span class="font-bold text-slate-800 dark:text-white">8. Cold Email (Студен контакт)</span><button onclick="copyLibraryPrompt(this)" class="text-slate-500 hover:text-emerald-500 p-1 bg-white dark:bg-slate-800 rounded transition-colors"><i class="fa-regular fa-copy"></i></button></div>
+                            <p class="font-mono text-slate-600 dark:text-slate-400 text-[11px] bg-white dark:bg-slate-950 p-2.5 rounded border border-slate-200 dark:border-slate-800 leading-relaxed">[РОЛЯ]: Ти си B2B Sales Expert. [КОНТЕКСТ]: Предлагаме [УСЛУГА] на [ЦЕЛЕВА КОМПАНИЯ]. [ЗАДАЧА]: Напиши персонализиран студен имейл. [ОГРАНИЧЕНИЯ]: Макс 100 думи. Фокус върху техен проблем. [ФОРМАТ]: Имейл текст.</p>
                         </div>
-                        <!-- Prompt 9 -->
-                        <div class="p-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50 space-y-2">
-                            <div class="flex justify-between items-center"><span class="font-bold text-slate-800 dark:text-slate-200">9. Справяне с Възражения (Objection Handling)</span><button onclick="copyLibraryPrompt(this)" class="text-slate-500 hover:text-emerald-500 p-1 bg-white dark:bg-slate-900 rounded"><i class="fa-regular fa-copy"></i></button></div>
-                            <p class="font-mono text-slate-600 dark:text-slate-400 text-[11px] bg-white dark:bg-slate-950 p-2.5 rounded border border-slate-200 dark:border-slate-800 leading-relaxed">[РОЛЯ]: Ти си мениджър продажби. [КОНТЕКСТ]: Клиент казва "Много е скъпо" за нашия [ПРОДУКТ]. [ЗАДАЧА]: Дай ми 3 различни отговора (скрипта) за справяне с това възражение. [ОГРАНИЧЕНИЯ]: Отговорите трябва да изместват фокуса към стойността и ROI. [ФОРМАТ]: Разговорни реплики.</p>
+                        <div class="p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-[#0f172a] space-y-2">
+                            <div class="flex justify-between items-center"><span class="font-bold text-slate-800 dark:text-white">9. LinkedIn Съобщение за връзка</span><button onclick="copyLibraryPrompt(this)" class="text-slate-500 hover:text-emerald-500 p-1 bg-white dark:bg-slate-800 rounded transition-colors"><i class="fa-regular fa-copy"></i></button></div>
+                            <p class="font-mono text-slate-600 dark:text-slate-400 text-[11px] bg-white dark:bg-slate-950 p-2.5 rounded border border-slate-200 dark:border-slate-800 leading-relaxed">[РОЛЯ]: Ти си Networking специалист. [КОНТЕКСТ]: Искам да се свържа с [ИМЕ], който е [ДЛЪЖНОСТ]. [ЗАДАЧА]: Напиши покана за връзка (Connection Request). [ОГРАНИЧЕНИЯ]: До 300 символа. Без директна продажба. [ФОРМАТ]: Кратък текст.</p>
                         </div>
-                        <!-- Prompt 10 -->
-                        <div class="p-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50 space-y-2">
-                            <div class="flex justify-between items-center"><span class="font-bold text-slate-800 dark:text-slate-200">10. Follow-Up Имейл след Среща</span><button onclick="copyLibraryPrompt(this)" class="text-slate-500 hover:text-emerald-500 p-1 bg-white dark:bg-slate-900 rounded"><i class="fa-regular fa-copy"></i></button></div>
-                            <p class="font-mono text-slate-600 dark:text-slate-400 text-[11px] bg-white dark:bg-slate-950 p-2.5 rounded border border-slate-200 dark:border-slate-800 leading-relaxed">[РОЛЯ]: Ти си акаунт мениджър. [КОНТЕКСТ]: Имахме успешна демо среща с клиент за [СОФТУЕР]. [ЗАДАЧА]: Напиши имейл за последващо действие (follow-up). [ОГРАНИЧЕНИЯ]: Благодари за времето, резюмирай 2 основни точки от разговора и предложи следваща стъпка. [ФОРМАТ]: Имейл текст.</p>
+                        <div class="p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-[#0f172a] space-y-2">
+                            <div class="flex justify-between items-center"><span class="font-bold text-slate-800 dark:text-white">10. Справяне с възражения (Objections)</span><button onclick="copyLibraryPrompt(this)" class="text-slate-500 hover:text-emerald-500 p-1 bg-white dark:bg-slate-800 rounded transition-colors"><i class="fa-regular fa-copy"></i></button></div>
+                            <p class="font-mono text-slate-600 dark:text-slate-400 text-[11px] bg-white dark:bg-slate-950 p-2.5 rounded border border-slate-200 dark:border-slate-800 leading-relaxed">[РОЛЯ]: Ти си Senior Sales Manager. [КОНТЕКСТ]: Клиент каза "[ВЪЗРАЖЕНИЕ, напр. Много е скъпо]". [ЗАДАЧА]: Дай ми 3 начина да отговоря. [ОГРАНИЧЕНИЯ]: Използвай емпатия, след това стойност. [ФОРМАТ]: Списък с точни реплики.</p>
                         </div>
-                        <!-- Prompt 11 -->
-                        <div class="p-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50 space-y-2">
-                            <div class="flex justify-between items-center"><span class="font-bold text-slate-800 dark:text-slate-200">11. LinkedIn Outreach Съобщение</span><button onclick="copyLibraryPrompt(this)" class="text-slate-500 hover:text-emerald-500 p-1 bg-white dark:bg-slate-900 rounded"><i class="fa-regular fa-copy"></i></button></div>
-                            <p class="font-mono text-slate-600 dark:text-slate-400 text-[11px] bg-white dark:bg-slate-950 p-2.5 rounded border border-slate-200 dark:border-slate-800 leading-relaxed">[РОЛЯ]: Ти си специалист по мрежови контакти. [КОНТЕКСТ]: Искам да се свържа със CEO на [ИНДУСТРИЯ] в LinkedIn. [ЗАДАЧА]: Напиши съобщение за покана за връзка (до 300 символа). [ОГРАНИЧЕНИЯ]: Без директна продажба, търсим взаимна полза и общи интереси. [ФОРМАТ]: Кратко съобщение.</p>
+                        <div class="p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-[#0f172a] space-y-2">
+                            <div class="flex justify-between items-center"><span class="font-bold text-slate-800 dark:text-white">11. Follow-up Имейл</span><button onclick="copyLibraryPrompt(this)" class="text-slate-500 hover:text-emerald-500 p-1 bg-white dark:bg-slate-800 rounded transition-colors"><i class="fa-regular fa-copy"></i></button></div>
+                            <p class="font-mono text-slate-600 dark:text-slate-400 text-[11px] bg-white dark:bg-slate-950 p-2.5 rounded border border-slate-200 dark:border-slate-800 leading-relaxed">[РОЛЯ]: Ти си Account Executive. [КОНТЕКСТ]: Имахме среща преди 3 дни, чакам отговор. [ЗАДАЧА]: Напиши follow-up имейл. [ОГРАНИЧЕНИЯ]: Да не звучи отчаяно. Добави лека допълнителна стойност. [ФОРМАТ]: Имейл текст.</p>
                         </div>
-                        <!-- Prompt 12 -->
-                        <div class="p-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50 space-y-2">
-                            <div class="flex justify-between items-center"><span class="font-bold text-slate-800 dark:text-slate-200">12. Структура на Sales Pitch Deck</span><button onclick="copyLibraryPrompt(this)" class="text-slate-500 hover:text-emerald-500 p-1 bg-white dark:bg-slate-900 rounded"><i class="fa-regular fa-copy"></i></button></div>
-                            <p class="font-mono text-slate-600 dark:text-slate-400 text-[11px] bg-white dark:bg-slate-950 p-2.5 rounded border border-slate-200 dark:border-slate-800 leading-relaxed">[РОЛЯ]: Ти си старши презентатор и стратег. [КОНТЕКСТ]: Трябва да направим презентация пред инвеститори/клиенти за [ИДЕЯ/ПРОДУКТ]. [ЗАДАЧА]: Генерирай структура за 10 слайда. [ОГРАНИЧЕНИЯ]: Включи заглавие и ключова точка за всеки слайд (напр. Проблем, Решение, Пазар). [ФОРМАТ]: Списък със слайдове.</p>
+                        <div class="p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-[#0f172a] space-y-2">
+                            <div class="flex justify-between items-center"><span class="font-bold text-slate-800 dark:text-white">12. Търговско Предложение (Proposal)</span><button onclick="copyLibraryPrompt(this)" class="text-slate-500 hover:text-emerald-500 p-1 bg-white dark:bg-slate-800 rounded transition-colors"><i class="fa-regular fa-copy"></i></button></div>
+                            <p class="font-mono text-slate-600 dark:text-slate-400 text-[11px] bg-white dark:bg-slate-950 p-2.5 rounded border border-slate-200 dark:border-slate-800 leading-relaxed">[РОЛЯ]: Ти си Sales Director. [КОНТЕКСТ]: Клиентът иска оферта за [УСЛУГА]. [ЗАДАЧА]: Напиши структура за печелившо търговско предложение. [ОГРАНИЧЕНИЯ]: Включи секции за проблем, решение, ROI и цена. [ФОРМАТ]: Markdown структура.</p>
                         </div>
-                        <!-- Prompt 13 -->
-                        <div class="p-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50 space-y-2">
-                            <div class="flex justify-between items-center"><span class="font-bold text-slate-800 dark:text-slate-200">13. Шаблон за Търговско Предложение (B2B)</span><button onclick="copyLibraryPrompt(this)" class="text-slate-500 hover:text-emerald-500 p-1 bg-white dark:bg-slate-900 rounded"><i class="fa-regular fa-copy"></i></button></div>
-                            <p class="font-mono text-slate-600 dark:text-slate-400 text-[11px] bg-white dark:bg-slate-950 p-2.5 rounded border border-slate-200 dark:border-slate-800 leading-relaxed">[РОЛЯ]: Ти си бизнес анализатор. [КОНТЕКСТ]: Пиша официална оферта за [УСЛУГА] за фирма [КЛИЕНТ]. [ЗАДАЧА]: Напиши изпълнително резюме (Executive Summary) и секция "Очаквани резултати". [ОГРАНИЧЕНИЯ]: Звучи професионално и уверено. [ФОРМАТ]: Текст, разделен на параграфи.</p>
+                        <div class="p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-[#0f172a] space-y-2">
+                            <div class="flex justify-between items-center"><span class="font-bold text-slate-800 dark:text-white">13. Скрипт за студен разговор (Cold Call)</span><button onclick="copyLibraryPrompt(this)" class="text-slate-500 hover:text-emerald-500 p-1 bg-white dark:bg-slate-800 rounded transition-colors"><i class="fa-regular fa-copy"></i></button></div>
+                            <p class="font-mono text-slate-600 dark:text-slate-400 text-[11px] bg-white dark:bg-slate-950 p-2.5 rounded border border-slate-200 dark:border-slate-800 leading-relaxed">[РОЛЯ]: Ти си топ Cold Caller. [КОНТЕКСТ]: Звъня на [ДЛЪЖНОСТ] за [ПРОДУКТ]. [ЗАДАЧА]: Напиши скрипт за първите 30 секунди. [ОГРАНИЧЕНИЯ]: Трябва да е директен и да предизвика интерес веднага. [ФОРМАТ]: Диалог (Аз / Клиент).</p>
                         </div>
-                        <!-- Prompt 14 -->
-                        <div class="p-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50 space-y-2">
-                            <div class="flex justify-between items-center"><span class="font-bold text-slate-800 dark:text-slate-200">14. Onboarding Имейл Поредица за Клиенти</span><button onclick="copyLibraryPrompt(this)" class="text-slate-500 hover:text-emerald-500 p-1 bg-white dark:bg-slate-900 rounded"><i class="fa-regular fa-copy"></i></button></div>
-                            <p class="font-mono text-slate-600 dark:text-slate-400 text-[11px] bg-white dark:bg-slate-950 p-2.5 rounded border border-slate-200 dark:border-slate-800 leading-relaxed">[РОЛЯ]: Ти си Customer Success Manager. [КОНТЕКСТ]: Нов клиент току-що закупи нашия [СОФТУЕР]. [ЗАДАЧА]: Напиши последователност от 3 имейла за първите им 7 дни. [ОГРАНИЧЕНИЯ]: Ден 1: Добре дошли. Ден 3: Първи стъпки/Tips. Ден 7: Проверка/Въпроси. [ФОРМАТ]: 3 отделни имейла.</p>
+                        <div class="p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-[#0f172a] space-y-2">
+                            <div class="flex justify-between items-center"><span class="font-bold text-slate-800 dark:text-white">14. Подготовка за преговори</span><button onclick="copyLibraryPrompt(this)" class="text-slate-500 hover:text-emerald-500 p-1 bg-white dark:bg-slate-800 rounded transition-colors"><i class="fa-regular fa-copy"></i></button></div>
+                            <p class="font-mono text-slate-600 dark:text-slate-400 text-[11px] bg-white dark:bg-slate-950 p-2.5 rounded border border-slate-200 dark:border-slate-800 leading-relaxed">[РОЛЯ]: Ти си експерт по преговори. [КОНТЕКСТ]: Предстои ми среща за финализиране на сделка. Клиентът иска 20% отстъпка. [ЗАДАЧА]: Дай ми стратегия как да запазя цената, като предложа друга стойност. [ФОРМАТ]: Списък с тактики.</p>
                         </div>
                     </div>
                 </div>
 
-                <!-- CATEGORY 3: HR & MANAGEMENT -->
-                <div class="space-y-4">
-                    <h3 class="text-lg font-bold text-rose-600 dark:text-rose-400 border-b border-slate-100 dark:border-slate-800 pb-2"><i class="fa-solid fa-users mr-2"></i> 3. Човешки Ресурси (HR) & Мениджмънт</h3>
+                <!-- TAB CONTENT: HR -->
+                <div id="tab-hr" class="tab-content hidden pt-4">
                     <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 text-xs">
-                        <!-- Prompt 15 -->
-                        <div class="p-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50 space-y-2">
-                            <div class="flex justify-between items-center"><span class="font-bold text-slate-800 dark:text-slate-200">15. Генератор на Обява за Работа</span><button onclick="copyLibraryPrompt(this)" class="text-slate-500 hover:text-rose-500 p-1 bg-white dark:bg-slate-900 rounded"><i class="fa-regular fa-copy"></i></button></div>
-                            <p class="font-mono text-slate-600 dark:text-slate-400 text-[11px] bg-white dark:bg-slate-950 p-2.5 rounded border border-slate-200 dark:border-slate-800 leading-relaxed">[РОЛЯ]: Ти си Senior HR Recruiter. [КОНТЕКСТ]: Търсим да наемем [ПОЗИЦИЯ] за нашата компания. [ЗАДАЧА]: Напиши атрактивна обява за работа. [ОГРАНИЧЕНИЯ]: Включи отговорности, изисквания и какво предлагаме ние. Тонът да е модерен и приобщаващ. [ФОРМАТ]: Структуриран текст за обява.</p>
+                        <div class="p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-[#0f172a] space-y-2">
+                            <div class="flex justify-between items-center"><span class="font-bold text-slate-800 dark:text-white">15. Генератор на Обява за Работа</span><button onclick="copyLibraryPrompt(this)" class="text-slate-500 hover:text-rose-500 p-1 bg-white dark:bg-slate-800 rounded transition-colors"><i class="fa-regular fa-copy"></i></button></div>
+                            <p class="font-mono text-slate-600 dark:text-slate-400 text-[11px] bg-white dark:bg-slate-950 p-2.5 rounded border border-slate-200 dark:border-slate-800 leading-relaxed">[РОЛЯ]: Ти си Senior HR Recruiter. [КОНТЕКСТ]: Търсим [ПОЗИЦИЯ] за нашата компания. [ЗАДАЧА]: Напиши атрактивна обява за работа. [ОГРАНИЧЕНИЯ]: Модерен и приобщаващ тон. [ФОРМАТ]: Структуриран текст (Изисквания, Предлагаме).</p>
                         </div>
-                        <!-- Prompt 16 -->
-                        <div class="p-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50 space-y-2">
-                            <div class="flex justify-between items-center"><span class="font-bold text-slate-800 dark:text-slate-200">16. Въпроси за Интервю (Поведенчески)</span><button onclick="copyLibraryPrompt(this)" class="text-slate-500 hover:text-rose-500 p-1 bg-white dark:bg-slate-900 rounded"><i class="fa-regular fa-copy"></i></button></div>
-                            <p class="font-mono text-slate-600 dark:text-slate-400 text-[11px] bg-white dark:bg-slate-950 p-2.5 rounded border border-slate-200 dark:border-slate-800 leading-relaxed">[РОЛЯ]: Ти си HR мениджър. [КОНТЕКСТ]: Ще интервюирам кандидат за [ПОЗИЦИЯ]. [ЗАДАЧА]: Генерирай 5 поведенчески (behavioral) въпроса по метода STAR (Situation, Task, Action, Result). [ОГРАНИЧЕНИЯ]: Фокус върху работа в екип и решаване на проблеми. [ФОРМАТ]: Списък с въпроси и какво да следя в отговора.</p>
+                        <div class="p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-[#0f172a] space-y-2">
+                            <div class="flex justify-between items-center"><span class="font-bold text-slate-800 dark:text-white">16. Въпроси за Интервю (Поведенчески)</span><button onclick="copyLibraryPrompt(this)" class="text-slate-500 hover:text-rose-500 p-1 bg-white dark:bg-slate-800 rounded transition-colors"><i class="fa-regular fa-copy"></i></button></div>
+                            <p class="font-mono text-slate-600 dark:text-slate-400 text-[11px] bg-white dark:bg-slate-950 p-2.5 rounded border border-slate-200 dark:border-slate-800 leading-relaxed">[РОЛЯ]: Ти си HR мениджър. [КОНТЕКСТ]: Интервюирам кандидат за [ПОЗИЦИЯ]. [ЗАДАЧА]: Генерирай 5 behavioral въпроса по метода STAR (Situation, Task, Action, Result). [ОГРАНИЧЕНИЯ]: Фокус върху работа в екип. [ФОРМАТ]: Списък.</p>
                         </div>
-                        <!-- Prompt 17 -->
-                        <div class="p-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50 space-y-2">
-                            <div class="flex justify-between items-center"><span class="font-bold text-slate-800 dark:text-slate-200">17. Оценка на Представянето (Performance Review)</span><button onclick="copyLibraryPrompt(this)" class="text-slate-500 hover:text-rose-500 p-1 bg-white dark:bg-slate-900 rounded"><i class="fa-regular fa-copy"></i></button></div>
-                            <p class="font-mono text-slate-600 dark:text-slate-400 text-[11px] bg-white dark:bg-slate-950 p-2.5 rounded border border-slate-200 dark:border-slate-800 leading-relaxed">[РОЛЯ]: Ти си Тийм Лийд. [КОНТЕКСТ]: Трябва да напиша годишна оценка за служител (Силни страни: [СИЛНИ], За подобрение: [СЛАБИ]). [ЗАДАЧА]: Напиши конструктивна и мотивираща оценка. [ОГРАНИЧЕНИЯ]: Използвай метода на "сандвича" (позитив-критика-позитив). [ФОРМАТ]: 3 кратки параграфа.</p>
+                        <div class="p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-[#0f172a] space-y-2">
+                            <div class="flex justify-between items-center"><span class="font-bold text-slate-800 dark:text-white">17. Оценка на Представянето (Review)</span><button onclick="copyLibraryPrompt(this)" class="text-slate-500 hover:text-rose-500 p-1 bg-white dark:bg-slate-800 rounded transition-colors"><i class="fa-regular fa-copy"></i></button></div>
+                            <p class="font-mono text-slate-600 dark:text-slate-400 text-[11px] bg-white dark:bg-slate-950 p-2.5 rounded border border-slate-200 dark:border-slate-800 leading-relaxed">[РОЛЯ]: Ти си Тийм Лийд. [КОНТЕКСТ]: Трябва да дам обратна връзка на служител, който се справя отлично, но закъснява с крайните срокове. [ЗАДАЧА]: Напиши конструктивно ревю. [ОГРАНИЧЕНИЯ]: Методът "Сандвич" (Позитив-Критика-Позитив). [ФОРМАТ]: Текст.</p>
                         </div>
-                        <!-- Prompt 18 -->
-                        <div class="p-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50 space-y-2">
-                            <div class="flex justify-between items-center"><span class="font-bold text-slate-800 dark:text-slate-200">18. Чеклист за Onboarding (Нов Служител)</span><button onclick="copyLibraryPrompt(this)" class="text-slate-500 hover:text-rose-500 p-1 bg-white dark:bg-slate-900 rounded"><i class="fa-regular fa-copy"></i></button></div>
-                            <p class="font-mono text-slate-600 dark:text-slate-400 text-[11px] bg-white dark:bg-slate-950 p-2.5 rounded border border-slate-200 dark:border-slate-800 leading-relaxed">[РОЛЯ]: Ти си Onboarding Специалист. [КОНТЕКСТ]: Посрещаме нов член в екипа. [ЗАДАЧА]: Създай план за първата седмица (Ден 1 до Ден 5). [ОГРАНИЧЕНИЯ]: Балансирай административни задачи със запознанства и лесни първи задачи. [ФОРМАТ]: Чеклист по дни.</p>
+                        <div class="p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-[#0f172a] space-y-2">
+                            <div class="flex justify-between items-center"><span class="font-bold text-slate-800 dark:text-white">18. Чеклист за Onboarding</span><button onclick="copyLibraryPrompt(this)" class="text-slate-500 hover:text-rose-500 p-1 bg-white dark:bg-slate-800 rounded transition-colors"><i class="fa-regular fa-copy"></i></button></div>
+                            <p class="font-mono text-slate-600 dark:text-slate-400 text-[11px] bg-white dark:bg-slate-950 p-2.5 rounded border border-slate-200 dark:border-slate-800 leading-relaxed">[РОЛЯ]: Ти си Onboarding Специалист. [КОНТЕКСТ]: Имаме нов [ПОЗИЦИЯ]. [ЗАДАЧА]: Създай план за въвеждане за първите 30 дни. [ОГРАНИЧЕНИЯ]: Раздели по седмици. [ФОРМАТ]: Markdown таблица с отметки.</p>
                         </div>
-                        <!-- Prompt 19 -->
-                        <div class="p-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50 space-y-2">
-                            <div class="flex justify-between items-center"><span class="font-bold text-slate-800 dark:text-slate-200">19. Идеи за Тийм Билдинг (Отдалечен Екип)</span><button onclick="copyLibraryPrompt(this)" class="text-slate-500 hover:text-rose-500 p-1 bg-white dark:bg-slate-900 rounded"><i class="fa-regular fa-copy"></i></button></div>
-                            <p class="font-mono text-slate-600 dark:text-slate-400 text-[11px] bg-white dark:bg-slate-950 p-2.5 rounded border border-slate-200 dark:border-slate-800 leading-relaxed">[РОЛЯ]: Ти си Office/Culture Manager. [КОНТЕКСТ]: Имаме екип от 15 души, които работят напълно дистанционно (Remote). [ЗАДАЧА]: Предложи 5 иновативни и забавни идеи за онлайн тийм билдинг. [ОГРАНИЧЕНИЯ]: Трябва да са нискобюджетни и да отнемат до 60 минути. [ФОРМАТ]: Списък с кратко обяснение.</p>
+                        <div class="p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-[#0f172a] space-y-2">
+                            <div class="flex justify-between items-center"><span class="font-bold text-slate-800 dark:text-white">19. Политика за Работа от Разстояние</span><button onclick="copyLibraryPrompt(this)" class="text-slate-500 hover:text-rose-500 p-1 bg-white dark:bg-slate-800 rounded transition-colors"><i class="fa-regular fa-copy"></i></button></div>
+                            <p class="font-mono text-slate-600 dark:text-slate-400 text-[11px] bg-white dark:bg-slate-950 p-2.5 rounded border border-slate-200 dark:border-slate-800 leading-relaxed">[РОЛЯ]: Ти си HR Директор. [КОНТЕКСТ]: Въвеждаме хибриден модел (3 дни в офиса, 2 вкъщи). [ЗАДАЧА]: Напиши вътрешна фирмена политика. [ОГРАНИЧЕНИЯ]: Ясни очаквания за комуникация и работно време. [ФОРМАТ]: Официален документ.</p>
                         </div>
-                        <!-- Prompt 20 -->
-                        <div class="p-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50 space-y-2">
-                            <div class="flex justify-between items-center"><span class="font-bold text-slate-800 dark:text-slate-200">20. Ръководство за Разрешаване на Конфликти</span><button onclick="copyLibraryPrompt(this)" class="text-slate-500 hover:text-rose-500 p-1 bg-white dark:bg-slate-900 rounded"><i class="fa-regular fa-copy"></i></button></div>
-                            <p class="font-mono text-slate-600 dark:text-slate-400 text-[11px] bg-white dark:bg-slate-950 p-2.5 rounded border border-slate-200 dark:border-slate-800 leading-relaxed">[РОЛЯ]: Ти си медиатор/HR. [КОНТЕКСТ]: Двама служители имат конфликт относно разпределението на задачите. [ЗАДАЧА]: Напиши скрипт/рамка за това как мениджърът да проведе среща с тях. [ОГРАНИЧЕНИЯ]: Бъди неутрален, фокусирай се върху активното слушане. [ФОРМАТ]: Стъпки (1, 2, 3) + примерни фрази.</p>
+                        <div class="p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-[#0f172a] space-y-2">
+                            <div class="flex justify-between items-center"><span class="font-bold text-slate-800 dark:text-white">20. Идеи за Тимбилдинг</span><button onclick="copyLibraryPrompt(this)" class="text-slate-500 hover:text-rose-500 p-1 bg-white dark:bg-slate-800 rounded transition-colors"><i class="fa-regular fa-copy"></i></button></div>
+                            <p class="font-mono text-slate-600 dark:text-slate-400 text-[11px] bg-white dark:bg-slate-950 p-2.5 rounded border border-slate-200 dark:border-slate-800 leading-relaxed">[РОЛЯ]: Ти си Office Manager. [КОНТЕКСТ]: Екипът от 20 души е демотивиран и работи дистанционно. [ЗАДАЧА]: Дай 5 креативни идеи за виртуален или хибриден тимбилдинг. [ОГРАНИЧЕНИЯ]: Бюджет до 50 евро на човек. [ФОРМАТ]: Списък.</p>
                         </div>
-                        <!-- Prompt 21 -->
-                        <div class="p-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50 space-y-2">
-                            <div class="flex justify-between items-center"><span class="font-bold text-slate-800 dark:text-slate-200">21. Формулиране на OKR (Цели и Ключови Резултати)</span><button onclick="copyLibraryPrompt(this)" class="text-slate-500 hover:text-rose-500 p-1 bg-white dark:bg-slate-900 rounded"><i class="fa-regular fa-copy"></i></button></div>
-                            <p class="font-mono text-slate-600 dark:text-slate-400 text-[11px] bg-white dark:bg-slate-950 p-2.5 rounded border border-slate-200 dark:border-slate-800 leading-relaxed">[РОЛЯ]: Ти си Agile Coach. [КОНТЕКСТ]: Искаме да поставим цели за тримесечието (Q3) за отдел [ОТДЕЛ]. Целта е растеж. [ЗАДАЧА]: Дефинирай 1 амбициозна цел (Objective) и 3 измерими ключови резултата (Key Results). [ОГРАНИЧЕНИЯ]: KR-ите трябва да имат конкретни числа. [ФОРМАТ]: Точен OKR формат.</p>
+                        <div class="p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-[#0f172a] space-y-2">
+                            <div class="flex justify-between items-center"><span class="font-bold text-slate-800 dark:text-white">21. Шаблон за 1:1 Среща</span><button onclick="copyLibraryPrompt(this)" class="text-slate-500 hover:text-rose-500 p-1 bg-white dark:bg-slate-800 rounded transition-colors"><i class="fa-regular fa-copy"></i></button></div>
+                            <p class="font-mono text-slate-600 dark:text-slate-400 text-[11px] bg-white dark:bg-slate-950 p-2.5 rounded border border-slate-200 dark:border-slate-800 leading-relaxed">[РОЛЯ]: Ти си Мениджър на екип. [КОНТЕКСТ]: Водя седмични 1:1 срещи със служителите си. [ЗАДАЧА]: Създай базов дневен ред (агенда) за срещата. [ОГРАНИЧЕНИЯ]: Фокус върху личното състояние и блокиращи проблеми. [ФОРМАТ]: Булети.</p>
                         </div>
                     </div>
                 </div>
 
-                <!-- CATEGORY 4: IT & AUTOMATION -->
-                <div class="space-y-4">
-                    <h3 class="text-lg font-bold text-amber-600 dark:text-amber-500 border-b border-slate-100 dark:border-slate-800 pb-2"><i class="fa-solid fa-code-branch mr-2"></i> 4. Програмиране & Автоматизация (IT/Make/Zapier)</h3>
+                <!-- TAB CONTENT: TECH -->
+                <div id="tab-tech" class="tab-content hidden pt-4">
                     <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 text-xs">
-                        <!-- Prompt 22 -->
-                        <div class="p-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50 space-y-2">
-                            <div class="flex justify-between items-center"><span class="font-bold text-slate-800 dark:text-slate-200">22. Make.com Логика на Сценарий</span><button onclick="copyLibraryPrompt(this)" class="text-slate-500 hover:text-amber-500 p-1 bg-white dark:bg-slate-900 rounded"><i class="fa-regular fa-copy"></i></button></div>
-                            <p class="font-mono text-slate-600 dark:text-slate-400 text-[11px] bg-white dark:bg-slate-950 p-2.5 rounded border border-slate-200 dark:border-slate-800 leading-relaxed">[РОЛЯ]: Ти си Automation Architect. [КОНТЕКСТ]: Искам да свържа Facebook Lead Ads с Google Sheets и да изпращам автоматичен имейл (Gmail). [ЗАДАЧА]: Опиши стъпка по стъпка какви модули да използвам в Make.com. [ОГРАНИЧЕНИЯ]: Посочи точните имена на модулите (напр. "Watch Leads"). [ФОРМАТ]: Номериран списък.</p>
+                        <div class="p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-[#0f172a] space-y-2">
+                            <div class="flex justify-between items-center"><span class="font-bold text-slate-800 dark:text-white">22. Архитектура за Make.com</span><button onclick="copyLibraryPrompt(this)" class="text-slate-500 hover:text-amber-500 p-1 bg-white dark:bg-slate-800 rounded transition-colors"><i class="fa-regular fa-copy"></i></button></div>
+                            <p class="font-mono text-slate-600 dark:text-slate-400 text-[11px] bg-white dark:bg-slate-950 p-2.5 rounded border border-slate-200 dark:border-slate-800 leading-relaxed">[РОЛЯ]: Ти си Automation Expert (Make.com). [КОНТЕКСТ]: Искам да свържа Typeform, OpenAI и Google Sheets. [ЗАДАЧА]: Опиши стъпка по стъпка модулите, които трябва да добавя в сценария си. [ФОРМАТ]: Номериран списък с технически детайли.</p>
                         </div>
-                        <!-- Prompt 23 -->
-                        <div class="p-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50 space-y-2">
-                            <div class="flex justify-between items-center"><span class="font-bold text-slate-800 dark:text-slate-200">23. Zapier Интеграция & Webhooks</span><button onclick="copyLibraryPrompt(this)" class="text-slate-500 hover:text-amber-500 p-1 bg-white dark:bg-slate-900 rounded"><i class="fa-regular fa-copy"></i></button></div>
-                            <p class="font-mono text-slate-600 dark:text-slate-400 text-[11px] bg-white dark:bg-slate-950 p-2.5 rounded border border-slate-200 dark:border-slate-800 leading-relaxed">[РОЛЯ]: Ти си експерт по Zapier. [КОНТЕКСТ]: Получавам данни чрез Webhook от custom форма. [ЗАДАЧА]: Напиши ми JSON структура, която трябва да изпратя, за да може Zapier да я разчете правилно като Name, Email и Message. [ОГРАНИЧЕНИЯ]: Дай валиден JSON код. [ФОРМАТ]: Code block.</p>
+                        <div class="p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-[#0f172a] space-y-2">
+                            <div class="flex justify-between items-center"><span class="font-bold text-slate-800 dark:text-white">23. Писане на Regex (Регулярен израз)</span><button onclick="copyLibraryPrompt(this)" class="text-slate-500 hover:text-amber-500 p-1 bg-white dark:bg-slate-800 rounded transition-colors"><i class="fa-regular fa-copy"></i></button></div>
+                            <p class="font-mono text-slate-600 dark:text-slate-400 text-[11px] bg-white dark:bg-slate-950 p-2.5 rounded border border-slate-200 dark:border-slate-800 leading-relaxed">[РОЛЯ]: Ти си Senior Programmer. [КОНТЕКСТ]: Имам голям текст и трябва да извлека всички български телефонни номера от него. [ЗАДАЧА]: Напиши точен Regex код за това. [ОГРАНИЧЕНИЯ]: Да хваща формати като +359 и 088. [ФОРМАТ]: Само кода и кратко обяснение.</p>
                         </div>
-                        <!-- Prompt 24 -->
-                        <div class="p-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50 space-y-2">
-                            <div class="flex justify-between items-center"><span class="font-bold text-slate-800 dark:text-slate-200">24. Рефакториране & Дебъгване на Код</span><button onclick="copyLibraryPrompt(this)" class="text-slate-500 hover:text-amber-500 p-1 bg-white dark:bg-slate-900 rounded"><i class="fa-regular fa-copy"></i></button></div>
-                            <p class="font-mono text-slate-600 dark:text-slate-400 text-[11px] bg-white dark:bg-slate-950 p-2.5 rounded border border-slate-200 dark:border-slate-800 leading-relaxed">[РОЛЯ]: Ти си Senior Developer. [КОНТЕКСТ]: Имам следния код на [ЕЗИК], който хвърля грешка: [КОД/ГРЕШКА]. [ЗАДАЧА]: Намери проблема, обясни го накратко и ми дай поправения код. [ОГРАНИЧЕНИЯ]: Направи кода по-четим (Clean Code принципи). [ФОРМАТ]: Обяснение + Code block.</p>
+                        <div class="p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-[#0f172a] space-y-2">
+                            <div class="flex justify-between items-center"><span class="font-bold text-slate-800 dark:text-white">24. SQL Заявка</span><button onclick="copyLibraryPrompt(this)" class="text-slate-500 hover:text-amber-500 p-1 bg-white dark:bg-slate-800 rounded transition-colors"><i class="fa-regular fa-copy"></i></button></div>
+                            <p class="font-mono text-slate-600 dark:text-slate-400 text-[11px] bg-white dark:bg-slate-950 p-2.5 rounded border border-slate-200 dark:border-slate-800 leading-relaxed">[РОЛЯ]: Ти си Database Administrator. [КОНТЕКСТ]: Имам таблици 'users' и 'orders'. [ЗАДАЧА]: Напиши SQL заявка, която връща топ 5 потребители с най-много похарчени пари през последния месец. [ФОРМАТ]: SQL код блок.</p>
                         </div>
-                        <!-- Prompt 25 -->
-                        <div class="p-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50 space-y-2">
-                            <div class="flex justify-between items-center"><span class="font-bold text-slate-800 dark:text-slate-200">25. Генериране на SQL Заявка (Query)</span><button onclick="copyLibraryPrompt(this)" class="text-slate-500 hover:text-amber-500 p-1 bg-white dark:bg-slate-900 rounded"><i class="fa-regular fa-copy"></i></button></div>
-                            <p class="font-mono text-slate-600 dark:text-slate-400 text-[11px] bg-white dark:bg-slate-950 p-2.5 rounded border border-slate-200 dark:border-slate-800 leading-relaxed">[РОЛЯ]: Ти си Database Administrator (DBA). [КОНТЕКСТ]: Имам таблици 'users' (id, name, email) и 'orders' (id, user_id, amount). [ЗАДАЧА]: Напиши SQL заявка, която връща топ 5 потребители с най-голяма сума на поръчките. [ОГРАНИЧЕНИЯ]: Използвай JOIN и GROUP BY. [ФОРМАТ]: SQL Code block.</p>
+                        <div class="p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-[#0f172a] space-y-2">
+                            <div class="flex justify-between items-center"><span class="font-bold text-slate-800 dark:text-white">25. Обясняване на код (Code Review)</span><button onclick="copyLibraryPrompt(this)" class="text-slate-500 hover:text-amber-500 p-1 bg-white dark:bg-slate-800 rounded transition-colors"><i class="fa-regular fa-copy"></i></button></div>
+                            <p class="font-mono text-slate-600 dark:text-slate-400 text-[11px] bg-white dark:bg-slate-950 p-2.5 rounded border border-slate-200 dark:border-slate-800 leading-relaxed">[РОЛЯ]: Ти си Ментор по програмиране. [КОНТЕКСТ]: Ето този код: [ПОСТАВИ КОД]. [ЗАДАЧА]: Обясни ми какво прави този код като на 10-годишно дете. Намери потенциални грешки (бъгове). [ФОРМАТ]: Прост текст.</p>
                         </div>
-                        <!-- Prompt 26 -->
-                        <div class="p-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50 space-y-2">
-                            <div class="flex justify-between items-center"><span class="font-bold text-slate-800 dark:text-slate-200">26. Шаблон за API Документация</span><button onclick="copyLibraryPrompt(this)" class="text-slate-500 hover:text-amber-500 p-1 bg-white dark:bg-slate-900 rounded"><i class="fa-regular fa-copy"></i></button></div>
-                            <p class="font-mono text-slate-600 dark:text-slate-400 text-[11px] bg-white dark:bg-slate-950 p-2.5 rounded border border-slate-200 dark:border-slate-800 leading-relaxed">[РОЛЯ]: Ти си Technical Writer. [КОНТЕКСТ]: Създадохме нов POST endpoint за създаване на потребител (/api/v1/users). [ЗАДАЧА]: Напиши API документация за този endpoint. [ОГРАНИЧЕНИЯ]: Включи URL, Headers, Body (JSON пример) и възможни отговори (200, 400). [ФОРМАТ]: Markdown.</p>
+                        <div class="p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-[#0f172a] space-y-2">
+                            <div class="flex justify-between items-center"><span class="font-bold text-slate-800 dark:text-white">26. Zapier Логика за CRM</span><button onclick="copyLibraryPrompt(this)" class="text-slate-500 hover:text-amber-500 p-1 bg-white dark:bg-slate-800 rounded transition-colors"><i class="fa-regular fa-copy"></i></button></div>
+                            <p class="font-mono text-slate-600 dark:text-slate-400 text-[11px] bg-white dark:bg-slate-950 p-2.5 rounded border border-slate-200 dark:border-slate-800 leading-relaxed">[РОЛЯ]: Ти си Zapier Expert. [КОНТЕКСТ]: Получавам лидове от Facebook Ads и искам да отиват в Pipedrive. [ЗАДАЧА]: Опиши тригера (Trigger) и екшъните (Actions), които трябва да настроя. [ФОРМАТ]: Списък със стъпки.</p>
                         </div>
-                        <!-- Prompt 27 -->
-                        <div class="p-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50 space-y-2">
-                            <div class="flex justify-between items-center"><span class="font-bold text-slate-800 dark:text-slate-200">27. Regular Expression (Regex) Builder</span><button onclick="copyLibraryPrompt(this)" class="text-slate-500 hover:text-amber-500 p-1 bg-white dark:bg-slate-900 rounded"><i class="fa-regular fa-copy"></i></button></div>
-                            <p class="font-mono text-slate-600 dark:text-slate-400 text-[11px] bg-white dark:bg-slate-950 p-2.5 rounded border border-slate-200 dark:border-slate-800 leading-relaxed">[РОЛЯ]: Ти си програмист. [КОНТЕКСТ]: Трябва да валидирам телефонни номера във формат "+359 XX XXX XXXX". [ЗАДАЧА]: Напиши Regex израз, който хваща този формат. [ОГРАНИЧЕНИЯ]: Обясни какво прави всяка част от Regex-а на прост език. [ФОРМАТ]: Regex код + Обяснение.</p>
+                        <div class="p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-[#0f172a] space-y-2">
+                            <div class="flex justify-between items-center"><span class="font-bold text-slate-800 dark:text-white">27. Генериране на JSON структура</span><button onclick="copyLibraryPrompt(this)" class="text-slate-500 hover:text-amber-500 p-1 bg-white dark:bg-slate-800 rounded transition-colors"><i class="fa-regular fa-copy"></i></button></div>
+                            <p class="font-mono text-slate-600 dark:text-slate-400 text-[11px] bg-white dark:bg-slate-950 p-2.5 rounded border border-slate-200 dark:border-slate-800 leading-relaxed">[РОЛЯ]: Ти си Data Architect. [КОНТЕКСТ]: Трябва ми структура за каталог с продукти. [ЗАДАЧА]: Създай валиден JSON обект за 2 примерни продукта. [ОГРАНИЧЕНИЯ]: Включи id, name, price, tags (масив). [ФОРМАТ]: JSON блок.</p>
                         </div>
-                        <!-- Prompt 28 -->
-                        <div class="p-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50 space-y-2">
-                            <div class="flex justify-between items-center"><span class="font-bold text-slate-800 dark:text-slate-200">28. Структуриране на Notion База Данни</span><button onclick="copyLibraryPrompt(this)" class="text-slate-500 hover:text-amber-500 p-1 bg-white dark:bg-slate-900 rounded"><i class="fa-regular fa-copy"></i></button></div>
-                            <p class="font-mono text-slate-600 dark:text-slate-400 text-[11px] bg-white dark:bg-slate-950 p-2.5 rounded border border-slate-200 dark:border-slate-800 leading-relaxed">[РОЛЯ]: Ти си експерт по продуктивност и Notion. [КОНТЕКСТ]: Искам да създам CRM система в Notion. [ЗАДАЧА]: Предложи какви колони (Properties) трябва да има основната база данни с Клиенти. [ОГРАНИЧЕНИЯ]: Включи типовете на колоните (Text, Select, Date, Relation). [ФОРМАТ]: Таблица.</p>
+                        <div class="p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-[#0f172a] space-y-2">
+                            <div class="flex justify-between items-center"><span class="font-bold text-slate-800 dark:text-white">28. Писане на Excel/Google Sheets Формула</span><button onclick="copyLibraryPrompt(this)" class="text-slate-500 hover:text-amber-500 p-1 bg-white dark:bg-slate-800 rounded transition-colors"><i class="fa-regular fa-copy"></i></button></div>
+                            <p class="font-mono text-slate-600 dark:text-slate-400 text-[11px] bg-white dark:bg-slate-950 p-2.5 rounded border border-slate-200 dark:border-slate-800 leading-relaxed">[РОЛЯ]: Ти си Excel Guru. [КОНТЕКСТ]: В колона А имам имена, в колона B имам продажби. [ЗАДАЧА]: Дай ми формула, която сумира продажбите само ако името е "Иван". [ФОРМАТ]: Само формулата (SUMIFS).</p>
                         </div>
                     </div>
                 </div>
 
-                <!-- CATEGORY 5: DESIGN & CREATIVE -->
-                <div class="space-y-4">
-                    <h3 class="text-lg font-bold text-pink-500 dark:text-pink-400 border-b border-slate-100 dark:border-slate-800 pb-2"><i class="fa-solid fa-palette mr-2"></i> 5. Дизайн, Видео & Креатив (Midjourney, YouTube)</h3>
+                <!-- TAB CONTENT: STRATEGY -->
+                <div id="tab-strategy" class="tab-content hidden pt-4">
                     <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 text-xs">
-                        <!-- Prompt 29 -->
-                        <div class="p-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50 space-y-2">
-                            <div class="flex justify-between items-center"><span class="font-bold text-slate-800 dark:text-slate-200">29. Midjourney / DALL-E Image Prompt</span><button onclick="copyLibraryPrompt(this)" class="text-slate-500 hover:text-pink-500 p-1 bg-white dark:bg-slate-900 rounded"><i class="fa-regular fa-copy"></i></button></div>
-                            <p class="font-mono text-slate-600 dark:text-slate-400 text-[11px] bg-white dark:bg-slate-950 p-2.5 rounded border border-slate-200 dark:border-slate-800 leading-relaxed">[РОЛЯ]: Ти си експерт по AI генериране на изображения. [КОНТЕКСТ]: Трябва ми снимка на [ОБЕКТ/СЦЕНА] за уебсайт. [ЗАДАЧА]: Напиши детайлен промпт на АНГЛИЙСКИ език. [ОГРАНИЧЕНИЯ]: Включи стил на осветление (cinematic lighting), стил на камерата (e.g., 35mm lens) и атмосфера. [ФОРМАТ]: Само промптът.</p>
+                        <div class="p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-[#0f172a] space-y-2">
+                            <div class="flex justify-between items-center"><span class="font-bold text-slate-800 dark:text-white">29. SWOT Анализ</span><button onclick="copyLibraryPrompt(this)" class="text-slate-500 hover:text-pink-500 p-1 bg-white dark:bg-slate-800 rounded transition-colors"><i class="fa-regular fa-copy"></i></button></div>
+                            <p class="font-mono text-slate-600 dark:text-slate-400 text-[11px] bg-white dark:bg-slate-950 p-2.5 rounded border border-slate-200 dark:border-slate-800 leading-relaxed">[РОЛЯ]: Ти си Бизнес Анализатор. [КОНТЕКСТ]: Нашата компания е [ОПИСАНИЕ]. [ЗАДАЧА]: Направи задълбочен SWOT анализ. [ФОРМАТ]: 4 квадранта (Силни страни, Слабости, Възможности, Заплахи) с булети.</p>
                         </div>
-                        <!-- Prompt 30 -->
-                        <div class="p-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50 space-y-2">
-                            <div class="flex justify-between items-center"><span class="font-bold text-slate-800 dark:text-slate-200">30. YouTube Скрипт (Сценарий)</span><button onclick="copyLibraryPrompt(this)" class="text-slate-500 hover:text-pink-500 p-1 bg-white dark:bg-slate-900 rounded"><i class="fa-regular fa-copy"></i></button></div>
-                            <p class="font-mono text-slate-600 dark:text-slate-400 text-[11px] bg-white dark:bg-slate-950 p-2.5 rounded border border-slate-200 dark:border-slate-800 leading-relaxed">[РОЛЯ]: Ти си успешен YouTube сценарист. [КОНТЕКСТ]: Правя видео за [ТЕМА]. [ЗАДАЧА]: Напиши силно интро (първите 30 секунди), което задържа вниманието, и outline за останалата част. [ОГРАНИЧЕНИЯ]: Вмъкни "кукичка" (hook) в първото изречение. [ФОРМАТ]: Видео скрипт.</p>
+                        <div class="p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-[#0f172a] space-y-2">
+                            <div class="flex justify-between items-center"><span class="font-bold text-slate-800 dark:text-white">30. Midjourney / DALL-E Промпт</span><button onclick="copyLibraryPrompt(this)" class="text-slate-500 hover:text-pink-500 p-1 bg-white dark:bg-slate-800 rounded transition-colors"><i class="fa-regular fa-copy"></i></button></div>
+                            <p class="font-mono text-slate-600 dark:text-slate-400 text-[11px] bg-white dark:bg-slate-950 p-2.5 rounded border border-slate-200 dark:border-slate-800 leading-relaxed">[РОЛЯ]: Ти си Art Director. [КОНТЕКСТ]: Трябва ми изображение за реклама на [ПРОДУКТ]. [ЗАДАЧА]: Напиши промпт за Midjourney на английски език. [ОГРАНИЧЕНИЯ]: Стил: photorealistic, 8k, cinematic lighting. [ФОРМАТ]: Текст на английски.</p>
                         </div>
-                        <!-- Prompt 31 -->
-                        <div class="p-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50 space-y-2">
-                            <div class="flex justify-between items-center"><span class="font-bold text-slate-800 dark:text-slate-200">31. TikTok / Reels Hook Идеи</span><button onclick="copyLibraryPrompt(this)" class="text-slate-500 hover:text-pink-500 p-1 bg-white dark:bg-slate-900 rounded"><i class="fa-regular fa-copy"></i></button></div>
-                            <p class="font-mono text-slate-600 dark:text-slate-400 text-[11px] bg-white dark:bg-slate-950 p-2.5 rounded border border-slate-200 dark:border-slate-800 leading-relaxed">[РОЛЯ]: Ти си Viral Content Creator. [КОНТЕКСТ]: Продуктът ми е [ПРОДУКТ]. [ЗАДАЧА]: Дай ми 5 идеи за кратки, удрящи "hooks" (първи изречения) за кратко видео. [ОГРАНИЧЕНИЯ]: Трябва да са провокативни или да обещават решаване на голям проблем. [ФОРМАТ]: Списък.</p>
+                        <div class="p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-[#0f172a] space-y-2">
+                            <div class="flex justify-between items-center"><span class="font-bold text-slate-800 dark:text-white">31. Анализ на Конкуренти</span><button onclick="copyLibraryPrompt(this)" class="text-slate-500 hover:text-pink-500 p-1 bg-white dark:bg-slate-800 rounded transition-colors"><i class="fa-regular fa-copy"></i></button></div>
+                            <p class="font-mono text-slate-600 dark:text-slate-400 text-[11px] bg-white dark:bg-slate-950 p-2.5 rounded border border-slate-200 dark:border-slate-800 leading-relaxed">[РОЛЯ]: Ти си Стратег. [КОНТЕКСТ]: Основният ни конкурент е [ИМЕ НА КОМПАНИЯ]. [ЗАДАЧА]: Анализирай техния бизнес модел спрямо нашия. Намери 3 техни слабости, които можем да експлоатираме. [ФОРМАТ]: Аналитичен репорт.</p>
                         </div>
-                        <!-- Prompt 32 -->
-                        <div class="p-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50 space-y-2">
-                            <div class="flex justify-between items-center"><span class="font-bold text-slate-800 dark:text-slate-200">32. Цветова Палитра & Типография</span><button onclick="copyLibraryPrompt(this)" class="text-slate-500 hover:text-pink-500 p-1 bg-white dark:bg-slate-900 rounded"><i class="fa-regular fa-copy"></i></button></div>
-                            <p class="font-mono text-slate-600 dark:text-slate-400 text-[11px] bg-white dark:bg-slate-950 p-2.5 rounded border border-slate-200 dark:border-slate-800 leading-relaxed">[РОЛЯ]: Ти си Brand Designer. [КОНТЕКСТ]: Стартирам нов бранд за [НИША]. Искам да излъчва [ЕМОЦИЯ/УСЕЩАНЕ]. [ЗАДАЧА]: Предложи цветова палитра (с HEX кодове) и комбинация от 2 шрифта (Google Fonts). [ОГРАНИЧЕНИЯ]: Обясни психологията зад всеки цвят. [ФОРМАТ]: Структуриран текст.</p>
+                        <div class="p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-[#0f172a] space-y-2">
+                            <div class="flex justify-between items-center"><span class="font-bold text-slate-800 dark:text-white">32. Дефиниране на OKRs</span><button onclick="copyLibraryPrompt(this)" class="text-slate-500 hover:text-pink-500 p-1 bg-white dark:bg-slate-800 rounded transition-colors"><i class="fa-regular fa-copy"></i></button></div>
+                            <p class="font-mono text-slate-600 dark:text-slate-400 text-[11px] bg-white dark:bg-slate-950 p-2.5 rounded border border-slate-200 dark:border-slate-800 leading-relaxed">[РОЛЯ]: Ти си CEO. [КОНТЕКСТ]: Целта ни за тримесечието е да увеличим приходите. [ЗАДАЧА]: Дефинирай 1 Objective и 3 Key Results (OKRs). [ОГРАНИЧЕНИЯ]: Трябва да са измерими (SMART). [ФОРМАТ]: Списък.</p>
                         </div>
-                        <!-- Prompt 33 -->
-                        <div class="p-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50 space-y-2">
-                            <div class="flex justify-between items-center"><span class="font-bold text-slate-800 dark:text-slate-200">33. UX/UI Wireframe Структура на Лендинг</span><button onclick="copyLibraryPrompt(this)" class="text-slate-500 hover:text-pink-500 p-1 bg-white dark:bg-slate-900 rounded"><i class="fa-regular fa-copy"></i></button></div>
-                            <p class="font-mono text-slate-600 dark:text-slate-400 text-[11px] bg-white dark:bg-slate-950 p-2.5 rounded border border-slate-200 dark:border-slate-800 leading-relaxed">[РОЛЯ]: Ти си UX/UI дизайнер. [КОНТЕКСТ]: Правим лендинг страница за регистрация за [СЪБИТИЕ/ПРОДУКТ]. [ЗАДАЧА]: Опиши структурата на секциите от горе надолу (Hero, Social Proof, Features, CTA). [ОГРАНИЧЕНИЯ]: Фокус върху висока конверсия. [ФОРМАТ]: Номериран списък със секции.</p>
+                        <div class="p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-[#0f172a] space-y-2">
+                            <div class="flex justify-between items-center"><span class="font-bold text-slate-800 dark:text-white">33. Брейнсторминг (Идеи за Продукт)</span><button onclick="copyLibraryPrompt(this)" class="text-slate-500 hover:text-pink-500 p-1 bg-white dark:bg-slate-800 rounded transition-colors"><i class="fa-regular fa-copy"></i></button></div>
+                            <p class="font-mono text-slate-600 dark:text-slate-400 text-[11px] bg-white dark:bg-slate-950 p-2.5 rounded border border-slate-200 dark:border-slate-800 leading-relaxed">[РОЛЯ]: Ти си Иноватор. [КОНТЕКСТ]: Искаме да създадем нова услуга за [ЦЕЛЕВА АУДИТОРИЯ]. [ЗАДАЧА]: Генерирай 10 нестандартни, "out-of-the-box" идеи. [ОГРАНИЧЕНИЯ]: Без клишета. [ФОРМАТ]: Номериран списък с кратки обосновки.</p>
                         </div>
-                        <!-- Prompt 34 -->
-                        <div class="p-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50 space-y-2">
-                            <div class="flex justify-between items-center"><span class="font-bold text-slate-800 dark:text-slate-200">34. Storyboard Описание за Рекламно Видео</span><button onclick="copyLibraryPrompt(this)" class="text-slate-500 hover:text-pink-500 p-1 bg-white dark:bg-slate-900 rounded"><i class="fa-regular fa-copy"></i></button></div>
-                            <p class="font-mono text-slate-600 dark:text-slate-400 text-[11px] bg-white dark:bg-slate-950 p-2.5 rounded border border-slate-200 dark:border-slate-800 leading-relaxed">[РОЛЯ]: Ти си Video Director. [КОНТЕКСТ]: Трябва да заснемем 30-секундна видео реклама за [ПРОДУКТ]. [ЗАДАЧА]: Напиши storyboard (сцена по сцена). [ОГРАНИЧЕНИЯ]: За всяка сцена опиши: Кадър (Визуално), Аудио (Voiceover/Музика) и Времетраене. [ФОРМАТ]: Таблица.</p>
+                        <div class="p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-[#0f172a] space-y-2">
+                            <div class="flex justify-between items-center"><span class="font-bold text-slate-800 dark:text-white">34. План за Управление на Риска</span><button onclick="copyLibraryPrompt(this)" class="text-slate-500 hover:text-pink-500 p-1 bg-white dark:bg-slate-800 rounded transition-colors"><i class="fa-regular fa-copy"></i></button></div>
+                            <p class="font-mono text-slate-600 dark:text-slate-400 text-[11px] bg-white dark:bg-slate-950 p-2.5 rounded border border-slate-200 dark:border-slate-800 leading-relaxed">[РОЛЯ]: Ти си Project Manager. [КОНТЕКСТ]: Стартираме проект за [ОПИСАНИЕ]. [ЗАДАЧА]: Идентифицирай 5 потенциални риска и предложи стратегия за смекчаването им (mitigation). [ФОРМАТ]: Таблица (Риск, Вероятност, Влияние, Решение).</p>
                         </div>
-                        <!-- Prompt 35 -->
-                        <div class="p-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50 space-y-2">
-                            <div class="flex justify-between items-center"><span class="font-bold text-slate-800 dark:text-slate-200">35. Подкаст Интервю Въпроси</span><button onclick="copyLibraryPrompt(this)" class="text-slate-500 hover:text-pink-500 p-1 bg-white dark:bg-slate-900 rounded"><i class="fa-regular fa-copy"></i></button></div>
-                            <p class="font-mono text-slate-600 dark:text-slate-400 text-[11px] bg-white dark:bg-slate-950 p-2.5 rounded border border-slate-200 dark:border-slate-800 leading-relaxed">[РОЛЯ]: Ти си водещ на успешен подкаст. [КОНТЕКСТ]: Гостът ми е [ИМЕ], експерт в [СФЕРА]. Темата е [ТЕМА]. [ЗАДАЧА]: Генерирай 7 дълбоки, нестандартни въпроса за интервюто. [ОГРАНИЧЕНИЯ]: Избягвай скучни въпроси като "Как започна?". Търси лични истории и провали. [ФОРМАТ]: Списък.</p>
+                        <div class="p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-[#0f172a] space-y-2">
+                            <div class="flex justify-between items-center"><span class="font-bold text-slate-800 dark:text-white">35. Подготовка за Презентация (Pitch Deck)</span><button onclick="copyLibraryPrompt(this)" class="text-slate-500 hover:text-pink-500 p-1 bg-white dark:bg-slate-800 rounded transition-colors"><i class="fa-regular fa-copy"></i></button></div>
+                            <p class="font-mono text-slate-600 dark:text-slate-400 text-[11px] bg-white dark:bg-slate-950 p-2.5 rounded border border-slate-200 dark:border-slate-800 leading-relaxed">[РОЛЯ]: Ти си Startup Founder. [КОНТЕКСТ]: Ще презентирам пред инвеститори. [ЗАДАЧА]: Напиши структурата за 10-слайдов Pitch Deck. [ОГРАНИЧЕНИЯ]: Включи Проблем, Решение, Пазар, Екип, Тракшън. [ФОРМАТ]: Списък със заглавия на слайдове.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TAB CONTENT: CREATIVES -->
+                <div id="tab-creatives" class="tab-content hidden pt-4">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 text-xs">
+                        <div class="p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-[#0f172a] space-y-2">
+                            <div class="flex justify-between items-center"><span class="font-bold text-slate-800 dark:text-white">36. Идеи за TikTok / Reels Видеа</span><button onclick="copyLibraryPrompt(this)" class="text-slate-500 hover:text-fuchsia-500 p-1 bg-white dark:bg-slate-800 rounded transition-colors"><i class="fa-regular fa-copy"></i></button></div>
+                            <p class="font-mono text-slate-600 dark:text-slate-400 text-[11px] bg-white dark:bg-slate-950 p-2.5 rounded border border-slate-200 dark:border-slate-800 leading-relaxed">[РОЛЯ]: Ти си Creative Director. [КОНТЕКСТ]: Продаваме [ПРОДУКТ]. [ЗАДАЧА]: Генерирай 5 вирусни (viral) идеи за кратки видеа (TikTok/Reels). [ОГРАНИЧЕНИЯ]: Включи аудио тренд и визуално описание. [ФОРМАТ]: Списък.</p>
+                        </div>
+                        <div class="p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-[#0f172a] space-y-2">
+                            <div class="flex justify-between items-center"><span class="font-bold text-slate-800 dark:text-white">37. Изображение за Midjourney / DALL-E</span><button onclick="copyLibraryPrompt(this)" class="text-slate-500 hover:text-fuchsia-500 p-1 bg-white dark:bg-slate-800 rounded transition-colors"><i class="fa-regular fa-copy"></i></button></div>
+                            <p class="font-mono text-slate-600 dark:text-slate-400 text-[11px] bg-white dark:bg-slate-950 p-2.5 rounded border border-slate-200 dark:border-slate-800 leading-relaxed">[РОЛЯ]: Ти си AI Art Prompter. [КОНТЕКСТ]: Трябва ми визия за [ТЕМА]. [ЗАДАЧА]: Напиши детайлен промпт на английски език за Midjourney v6. [ОГРАНИЧЕНИЯ]: Включи осветление (cinematic lighting), стил (photorealistic) и камера (85mm lens). [ФОРМАТ]: Само промптът на английски.</p>
+                        </div>
+                        <div class="p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-[#0f172a] space-y-2">
+                            <div class="flex justify-between items-center"><span class="font-bold text-slate-800 dark:text-white">38. Tone of Voice (Глас на марката)</span><button onclick="copyLibraryPrompt(this)" class="text-slate-500 hover:text-fuchsia-500 p-1 bg-white dark:bg-slate-800 rounded transition-colors"><i class="fa-regular fa-copy"></i></button></div>
+                            <p class="font-mono text-slate-600 dark:text-slate-400 text-[11px] bg-white dark:bg-slate-950 p-2.5 rounded border border-slate-200 dark:border-slate-800 leading-relaxed">[РОЛЯ]: Ти си Brand Manager. [КОНТЕКСТ]: Създаваме нов бранд за [АУДИТОРИЯ]. [ЗАДАЧА]: Дефинирай правилата за комуникация (Tone of Voice). [ОГРАНИЧЕНИЯ]: Тонът трябва да е смел, провокативен и приятелски. [ФОРМАТ]: Таблица (Какво да правим / Какво да избягваме).</p>
+                        </div>
+                        <div class="p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-[#0f172a] space-y-2">
+                            <div class="flex justify-between items-center"><span class="font-bold text-slate-800 dark:text-white">39. Подкаст Сценарий и Въпроси</span><button onclick="copyLibraryPrompt(this)" class="text-slate-500 hover:text-fuchsia-500 p-1 bg-white dark:bg-slate-800 rounded transition-colors"><i class="fa-regular fa-copy"></i></button></div>
+                            <p class="font-mono text-slate-600 dark:text-slate-400 text-[11px] bg-white dark:bg-slate-950 p-2.5 rounded border border-slate-200 dark:border-slate-800 leading-relaxed">[РОЛЯ]: Ти си Podcast Host. [КОНТЕКСТ]: Гостът ми е [ИМЕ], експерт по [СФЕРА]. [ЗАДАЧА]: Подготви интро, аутро и 10 дълбоки въпроса за интервюто. [ОГРАНИЧЕНИЯ]: Избягвай клишета, търси нестандартни гледни точки. [ФОРМАТ]: Структуриран скрипт.</p>
+                        </div>
+                        <div class="p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-[#0f172a] space-y-2">
+                            <div class="flex justify-between items-center"><span class="font-bold text-slate-800 dark:text-white">40. Идеи за Визуален Банер</span><button onclick="copyLibraryPrompt(this)" class="text-slate-500 hover:text-fuchsia-500 p-1 bg-white dark:bg-slate-800 rounded transition-colors"><i class="fa-regular fa-copy"></i></button></div>
+                            <p class="font-mono text-slate-600 dark:text-slate-400 text-[11px] bg-white dark:bg-slate-950 p-2.5 rounded border border-slate-200 dark:border-slate-800 leading-relaxed">[РОЛЯ]: Ти си Graphic Designer. [КОНТЕКСТ]: Правим кампания за Black Friday за [ПРОДУКТ]. [ЗАДАЧА]: Опиши 3 различни визуални концепции за банер. [ОГРАНИЧЕНИЯ]: За всяка концепция посочи цветове, главен текст (headline) и фон. [ФОРМАТ]: Списък.</p>
                         </div>
                     </div>
                 </div>
 
             </section>
-
         </main>
     </div>
 
@@ -620,24 +799,23 @@
 
         <div id="chatMessages" class="flex-1 p-4 overflow-y-auto space-y-4 text-xs custom-scrollbar bg-slate-50 dark:bg-slate-950">
             <div class="flex items-start gap-2.5 animate-fade-in">
-                <div class="w-7 h-7 rounded-full gradient-bg text-white flex items-center justify-center text-xs flex-shrink-0"><i class="fa-solid fa-brain"></i></div>
-                <div class="p-3 bg-white dark:bg-slate-800 rounded-2xl rounded-tl-none max-w-[85%] text-slate-800 dark:text-slate-200 border border-slate-200 dark:border-slate-700">
-                    Здравейте! Аз съм вашият виртуален AI консултант в Pro версията. Как мога да ви помогна с автоматизацията днес?
+                <div class="w-7 h-7 rounded-full gradient-bg text-white flex items-center justify-center text-xs flex-shrink-0 shadow-md"><i class="fa-solid fa-brain"></i></div>
+                <div class="p-3 bg-white dark:bg-slate-800 rounded-2xl rounded-tl-none max-w-[85%] text-slate-800 dark:text-slate-200 border border-slate-200 dark:border-slate-700 shadow-sm chat-content">
+                    Здравейте! Аз съм вашият виртуален AI консултант в Pro версията. Свързан съм с живия модел. Как мога да ви помогна с бизнес процесите днес?
                 </div>
             </div>
         </div>
 
-        <div class="p-3 border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 flex flex-col">
+        <div class="bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 p-3 space-y-3">
             <!-- Бързи бутони (Chips) -->
-            <div class="flex gap-2 overflow-x-auto custom-scrollbar pb-2 mb-2 w-full">
-                <button class="chat-chip flex-shrink-0 whitespace-nowrap px-3 py-1.5 bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-full text-[11px] font-medium text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-white hover:bg-slate-200 dark:hover:bg-slate-700 transition-all">Как да започна с автоматизациите?</button>
-                <button class="chat-chip flex-shrink-0 whitespace-nowrap px-3 py-1.5 bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-full text-[11px] font-medium text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-white hover:bg-slate-200 dark:hover:bg-slate-700 transition-all">Идеи за маркетингов промпт?</button>
-                <button class="chat-chip flex-shrink-0 whitespace-nowrap px-3 py-1.5 bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-full text-[11px] font-medium text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-white hover:bg-slate-200 dark:hover:bg-slate-700 transition-all">Какво е EU AI Act?</button>
+            <div class="flex gap-2 overflow-x-auto custom-scrollbar pb-1">
+                <button class="quick-chat-chip whitespace-nowrap px-3 py-1.5 bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 border border-blue-200 dark:border-blue-800/50 rounded-full text-[11px] font-medium hover:bg-blue-100 dark:hover:bg-blue-900/50 transition-colors">Как да започна с автоматизациите?</button>
+                <button class="quick-chat-chip whitespace-nowrap px-3 py-1.5 bg-purple-50 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400 border border-purple-200 dark:border-purple-800/50 rounded-full text-[11px] font-medium hover:bg-purple-100 dark:hover:bg-purple-900/50 transition-colors">Идеи за маркетингов промпт?</button>
+                <button class="quick-chat-chip whitespace-nowrap px-3 py-1.5 bg-emerald-50 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800/50 rounded-full text-[11px] font-medium hover:bg-emerald-100 dark:hover:bg-emerald-900/50 transition-colors">Какви са рисковете в EU AI Act?</button>
             </div>
-            
             <div class="flex items-center gap-2">
-                <input type="text" id="chatInput" placeholder="Задайте въпрос към AI..." class="flex-1 px-3 py-2 text-xs bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-700 rounded-xl focus:outline-none focus:ring-1 focus:ring-blue-500 text-slate-800 dark:text-white transition-all">
-                <button id="sendChatBtn" class="p-2.5 gradient-bg text-white rounded-xl hover:opacity-90 transition-all flex items-center justify-center"><i class="fa-solid fa-paper-plane text-xs"></i></button>
+                <input type="text" id="chatInput" placeholder="Задайте въпрос към AI..." class="flex-1 px-3 py-2 text-xs bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl focus:outline-none focus:border-blue-500 transition-colors">
+                <button id="sendChatBtn" class="p-2.5 gradient-bg text-white rounded-xl hover:opacity-90 transition-all flex items-center justify-center shadow-md active:scale-95"><i class="fa-solid fa-paper-plane text-xs"></i></button>
             </div>
         </div>
     </div>
@@ -651,7 +829,7 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // Theme Toggle Logic
+            // Theme Toggle
             const themeToggle = document.getElementById('themeToggle');
             const html = document.documentElement;
             if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
@@ -670,7 +848,7 @@
                 document.getElementById('scrollProgress').style.width = ((winScroll / height) * 100) + '%';
             });
 
-            // Module Checkboxes Progress
+            // Module Checkboxes
             const moduleChecks = document.querySelectorAll('.module-check');
             const readProgressBar = document.getElementById('readProgressBar');
             const progressPercent = document.getElementById('progressPercent');
@@ -685,7 +863,7 @@
             }
             moduleChecks.forEach(chk => chk.addEventListener('change', updateProgress));
 
-            // AI Consultant Drawer Logic
+            // AI Drawer
             const aiConsultantPanel = document.getElementById('aiConsultantPanel');
             const toggleAiConsultantBtn = document.getElementById('toggleAiConsultantBtn');
             const closeAiConsultantBtn = document.getElementById('closeAiConsultantBtn');
@@ -693,55 +871,23 @@
             toggleAiConsultantBtn.addEventListener('click', togglePanel);
             closeAiConsultantBtn.addEventListener('click', togglePanel);
 
-            // AI Consultant Chat Chips & Messaging Logic
-            const chatInput = document.getElementById('chatInput');
-            const sendChatBtn = document.getElementById('sendChatBtn');
-            const chatMessages = document.getElementById('chatMessages');
-
-            function addMessageToChat(text, isUser) {
-                const wrapper = document.createElement('div');
-                wrapper.className = `flex items-start gap-2.5 animate-fade-in ${isUser ? 'flex-row-reverse' : ''}`;
-                
-                const avatar = isUser 
-                    ? `<div class="w-7 h-7 rounded-full bg-blue-600 text-white flex items-center justify-center text-xs flex-shrink-0"><i class="fa-solid fa-user"></i></div>`
-                    : `<div class="w-7 h-7 rounded-full gradient-bg text-white flex items-center justify-center text-xs flex-shrink-0"><i class="fa-solid fa-brain"></i></div>`;
-                
-                const bubble = isUser
-                    ? `<div class="p-3 bg-blue-600 text-white rounded-2xl rounded-tr-none max-w-[85%] border border-blue-700">${text}</div>`
-                    : `<div class="p-3 bg-white dark:bg-slate-800 rounded-2xl rounded-tl-none max-w-[85%] text-slate-800 dark:text-slate-200 border border-slate-200 dark:border-slate-700">${text}</div>`;
-
-                wrapper.innerHTML = avatar + bubble;
-                chatMessages.appendChild(wrapper);
-                chatMessages.scrollTop = chatMessages.scrollHeight; // Auto-scroll to bottom
-            }
-
-            // Click on chips (Малки бутони)
-            document.querySelectorAll('.chat-chip').forEach(chip => {
-                chip.addEventListener('click', (e) => {
-                    const text = e.target.innerText;
-                    chatInput.value = text;
-                    // Automatically send after small delay to feel natural
-                    setTimeout(() => {
-                        sendChatBtn.click();
-                    }, 200);
+            // Tabs Logic
+            const tabBtns = document.querySelectorAll('.tab-btn');
+            const tabContents = document.querySelectorAll('.tab-content');
+            tabBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    tabBtns.forEach(b => b.classList.remove('active', 'bg-blue-600', 'text-white'));
+                    tabContents.forEach(c => c.classList.add('hidden'));
+                    tabContents.forEach(c => c.classList.remove('active'));
+                    
+                    btn.classList.add('active');
+                    const targetId = btn.getAttribute('data-target');
+                    document.getElementById(targetId).classList.remove('hidden');
+                    document.getElementById(targetId).classList.add('active');
                 });
             });
 
-            // Send Chat Logic
-            sendChatBtn.addEventListener('click', () => {
-                const text = chatInput.value.trim();
-                if (!text) return;
-                
-                addMessageToChat(text, true); // User message
-                chatInput.value = '';
-
-                // Simulate AI response
-                setTimeout(() => {
-                    addMessageToChat("Това е симулиран отговор в демо средата. Интеграцията на живо се реализира чрез API ключ.", false);
-                }, 1000);
-            });
-
-            // Prompt Studio Generator Pro (Local Storage Logic)
+            // Prompt Studio
             const generatePromptBtn = document.getElementById('generatePromptBtn');
             const promptResult = document.getElementById('promptResult');
             const copyPromptBtn = document.getElementById('copyPromptBtn');
@@ -764,10 +910,10 @@
 
                 savedPrompts.forEach((item) => {
                     const card = document.createElement('div');
-                    card.className = 'p-3 bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl space-y-2 shadow-sm';
+                    card.className = 'p-3 bg-slate-50 dark:bg-[#0f172a] border border-slate-200 dark:border-slate-800 rounded-xl space-y-2 shadow-sm';
                     card.innerHTML = `
-                        <div class="flex justify-between items-center text-[11px] text-slate-500 dark:text-slate-400 border-b border-slate-100 dark:border-slate-800 pb-1">
-                            <span class="font-semibold text-amber-500 dark:text-amber-400">${item.role}</span>
+                        <div class="flex justify-between items-center text-[11px] text-slate-500 dark:text-slate-400 border-b border-slate-200 dark:border-slate-700/50 pb-1">
+                            <span class="font-semibold text-amber-600 dark:text-amber-400">${item.role}</span>
                             <span>${item.date}</span>
                         </div>
                         <p class="font-mono text-emerald-600 dark:text-emerald-400 text-[11px] whitespace-pre-wrap leading-relaxed">${item.text}</p>
@@ -779,14 +925,15 @@
             if (generatePromptBtn) {
                 generatePromptBtn.addEventListener('click', () => {
                     const role = document.getElementById('promptRole').value || 'Експерт';
-                    const context = document.getElementById('promptContext').value || 'Бизнес контекст';
-                    const task = document.getElementById('promptTask').value || 'Изпълни задачата';
-                    const output = document.getElementById('promptOutput').value || 'Ясен формат';
+                    const context = document.getElementById('promptContext').value || 'Бизнес';
+                    const task = document.getElementById('promptTask').value || 'Задача';
+                    const output = document.getElementById('promptOutput').value || 'Формат';
 
                     const full = `[РОЛЯ]: Влез в ролята на ${role}.\n[КОНТЕКСТ]: ${context}\n[ЗАДАЧА]: ${task}\n[ФОРМАТ]: ${output}.`;
                     promptResult.value = full;
 
                     savedPrompts.unshift({ role, text: full, date: new Date().toLocaleTimeString() });
+                    if (savedPrompts.length > 10) savedPrompts.pop();
                     localStorage.setItem('ai_manual_saved_prompts', JSON.stringify(savedPrompts));
                     renderSavedPrompts();
                 });
@@ -797,7 +944,6 @@
                     savedPrompts = [];
                     localStorage.removeItem('ai_manual_saved_prompts');
                     renderSavedPrompts();
-                    promptResult.value = '';
                 });
             }
             renderSavedPrompts();
@@ -811,9 +957,91 @@
                     setTimeout(() => { copyPromptBtn.innerHTML = '<i class="fa-regular fa-copy"></i> Копирай'; }, 2000);
                 });
             }
+
+            // Real Gemini API Integration
+            const chatMessages = document.getElementById('chatMessages');
+            const chatInput = document.getElementById('chatInput');
+            const sendChatBtn = document.getElementById('sendChatBtn');
+            const quickChatChips = document.querySelectorAll('.quick-chat-chip');
+
+            const scrollToBottom = () => { chatMessages.scrollTop = chatMessages.scrollHeight; };
+
+            const appendMessage = (text, sender) => {
+                const msgDiv = document.createElement('div');
+                msgDiv.className = `flex items-start gap-2.5 animate-fade-in ${sender === 'user' ? 'flex-row-reverse' : ''}`;
+                const icon = sender === 'user' 
+                    ? `<div class="w-7 h-7 rounded-full bg-blue-600 text-white flex items-center justify-center text-xs flex-shrink-0 shadow-md"><i class="fa-solid fa-user"></i></div>`
+                    : `<div class="w-7 h-7 rounded-full gradient-bg text-white flex items-center justify-center text-xs flex-shrink-0 shadow-md"><i class="fa-solid fa-brain"></i></div>`;
+                const bubbleClass = sender === 'user'
+                    ? `p-3 bg-blue-600 text-white rounded-2xl rounded-tr-none max-w-[85%] shadow-sm chat-content`
+                    : `p-3 bg-white dark:bg-slate-800 rounded-2xl rounded-tl-none max-w-[85%] text-slate-800 dark:text-slate-200 border border-slate-200 dark:border-slate-700 shadow-sm chat-content`;
+                const parsedText = (sender === 'ai' && typeof marked !== 'undefined') ? marked.parse(text) : text;
+                msgDiv.innerHTML = `${icon}<div class="${bubbleClass} text-[13px] leading-relaxed">${parsedText}</div>`;
+                chatMessages.appendChild(msgDiv);
+                scrollToBottom();
+            };
+
+            const appendLoading = () => {
+                const id = 'loading-' + Date.now();
+                const msgDiv = document.createElement('div');
+                msgDiv.id = id;
+                msgDiv.className = `flex items-start gap-2.5 animate-fade-in`;
+                msgDiv.innerHTML = `
+                    <div class="w-7 h-7 rounded-full gradient-bg text-white flex items-center justify-center text-xs flex-shrink-0 shadow-md"><i class="fa-solid fa-brain"></i></div>
+                    <div class="p-4 bg-white dark:bg-slate-800 rounded-2xl rounded-tl-none border border-slate-200 dark:border-slate-700 shadow-sm flex gap-1.5 items-center">
+                        <span class="w-2 h-2 rounded-full bg-slate-400 animate-bounce"></span>
+                        <span class="w-2 h-2 rounded-full bg-slate-400 animate-bounce" style="animation-delay: 0.15s"></span>
+                        <span class="w-2 h-2 rounded-full bg-slate-400 animate-bounce" style="animation-delay: 0.3s"></span>
+                    </div>`;
+                chatMessages.appendChild(msgDiv);
+                scrollToBottom();
+                return id;
+            };
+
+            const fetchAiResponse = async (userText) => {
+                const loadingId = appendLoading();
+                try {
+                    const apiKey = ""; // API Key handled automatically
+                    const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${apiKey}`;
+                    const payload = {
+                        contents: [{ role: "user", parts: [{ text: userText }] }],
+                        systemInstruction: { parts: [{ text: "Ти си полезен бизнес AI консултант. Отговаряй на български език. Бъди кратък и точен." }] }
+                    };
+                    const response = await fetch(apiUrl, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+                    const result = await response.json();
+                    document.getElementById(loadingId).remove();
+                    if (result.candidates?.[0]?.content) {
+                        appendMessage(result.candidates[0].content.parts[0].text, 'ai');
+                    } else {
+                        appendMessage("Извинете, възникна грешка в комуникацията.", 'ai');
+                    }
+                } catch (error) {
+                    document.getElementById(loadingId).remove();
+                    appendMessage("Техническа грешка при свързването с AI модела.", 'ai');
+                }
+            };
+
+            const handleChatSubmit = () => {
+                const text = chatInput.value.trim();
+                if (!text) return;
+                appendMessage(text, 'user');
+                chatInput.value = '';
+                fetchAiResponse(text);
+            };
+
+            sendChatBtn.addEventListener('click', handleChatSubmit);
+            chatInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') handleChatSubmit(); });
+
+            quickChatChips.forEach(chip => {
+                chip.addEventListener('click', () => {
+                    const text = chip.innerText;
+                    appendMessage(text, 'user');
+                    fetchAiResponse(text);
+                });
+            });
         });
 
-        // Copy Logic for 35+ Prompts in Library
+        // Prompt Library Copy function
         function copyLibraryPrompt(btn) {
             const pText = btn.parentElement.nextElementSibling.innerText;
             const el = document.createElement('textarea');
@@ -823,10 +1051,13 @@
             document.execCommand('copy');
             document.body.removeChild(el);
             
-            // Visual feedback
-            const originalIcon = btn.innerHTML;
+            const originalHTML = btn.innerHTML;
             btn.innerHTML = '<i class="fa-solid fa-check text-emerald-500"></i>';
-            setTimeout(() => { btn.innerHTML = originalIcon; }, 2000);
+            btn.classList.add('bg-emerald-100', 'dark:bg-emerald-900/30');
+            setTimeout(() => { 
+                btn.innerHTML = originalHTML; 
+                btn.classList.remove('bg-emerald-100', 'dark:bg-emerald-900/30');
+            }, 2000);
         }
     </script>
 </body>
