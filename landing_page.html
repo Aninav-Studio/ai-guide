@@ -154,7 +154,7 @@
                         <i class="fa-solid fa-book"></i>
                     </div>
                     <div class="space-y-2">
-                        <h3 class="text-xl font-bold">6 Практически Модула (PDF & Дигитален формат)</h3>
+                        <h3 class="text-xl font-bold">6 Практически Модула</h3>
                         <p class="text-xs text-slate-400 leading-relaxed">
                             Стратегическо планиране, PCTCO промпт рамка, No-code автоматизации с Make/Zapier, управление на промяната, правна рамка и измерване на ROI.
                         </p>
@@ -205,30 +205,50 @@
         </div>
     </section>
 
-    <!-- BONUSES SECTION -->
+    <!-- BONUSES SECTION - TESTABLE & DOWNLOADABLE -->
     <section id="bonuses" class="py-20">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
             <div class="text-center space-y-3">
-                <span class="text-xs font-bold px-3 py-1 rounded-full bg-amber-500/10 text-amber-400 border border-amber-500/20 uppercase tracking-wider">Ексклузивни Бонуси (На стойност €90)</span>
-                <h2 class="text-3xl sm:text-4xl font-extrabold">Вземи и тези 3 подаръка напълно безплатно</h2>
-                <p class="text-slate-400 text-sm">Включени към Pro пакета днес.</p>
+                <span class="text-xs font-bold px-3 py-1 rounded-full bg-amber-500/10 text-amber-400 border border-amber-500/20 uppercase tracking-wider">Ексклузивни Бонуси (€90 Стойност)</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold">Тествай и изтегли 3-те подаръка директно</h2>
+                <p class="text-slate-400 text-sm">Кликни на бутоните по-долу, за да тестваш свалянето на файловете веднага.</p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="p-6 rounded-2xl bg-slate-900 border border-slate-800 space-y-3">
-                    <span class="text-amber-400 font-bold text-xs">БОНУС #1 (€30 Стойност)</span>
-                    <h3 class="font-bold text-base">Дейли Таск Планер (PDF & Printable)</h3>
-                    <p class="text-xs text-slate-400 leading-relaxed">Готова система за разпределение на ежедневните задачи и делегиране на рутината към AI агенти.</p>
+                <!-- Bonus 1 -->
+                <div class="p-6 rounded-2xl bg-slate-900 border border-slate-800 space-y-4 flex flex-col justify-between">
+                    <div class="space-y-3">
+                        <span class="text-amber-400 font-bold text-xs">БОНУС #1 (€30 Стойност)</span>
+                        <h3 class="font-bold text-base">Дейли Таск Планер</h3>
+                        <p class="text-xs text-slate-400 leading-relaxed">Готова система за разпределение на ежедневните задачи и делегиране на рутината към AI агенти.</p>
+                    </div>
+                    <button onclick="testDownload('daily-task-planner.pdf')" class="w-full py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold transition-all flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-download"></i> Изтегли Бонус #1 (PDF)
+                    </button>
                 </div>
-                <div class="p-6 rounded-2xl bg-slate-900 border border-slate-800 space-y-3">
-                    <span class="text-amber-400 font-bold text-xs">БОНУС #2 (€30 Стойност)</span>
-                    <h3 class="font-bold text-base">Make.com Автоматизации</h3>
-                    <p class="text-xs text-slate-400 leading-relaxed">Готови схеми за свързване на входящи имейли с AI агенти за авто-отговори в реално време.</p>
+
+                <!-- Bonus 2 -->
+                <div class="p-6 rounded-2xl bg-slate-900 border border-slate-800 space-y-4 flex flex-col justify-between">
+                    <div class="space-y-3">
+                        <span class="text-amber-400 font-bold text-xs">БОНУС #2 (€30 Стойност)</span>
+                        <h3 class="font-bold text-base">Make.com Автоматизации</h3>
+                        <p class="text-xs text-slate-400 leading-relaxed">Готови схеми за свързване на входящи имейли с AI агенти за авто-отговори.</p>
+                    </div>
+                    <button onclick="testDownload('make-automations-guide.pdf')" class="w-full py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold transition-all flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-download"></i> Изтегли Бонус #2 (PDF)
+                    </button>
                 </div>
-                <div class="p-6 rounded-2xl bg-slate-900 border border-slate-800 space-y-3">
-                    <span class="text-amber-400 font-bold text-xs">БОНУС #3 (€30 Стойност)</span>
-                    <h3 class="font-bold text-base">Чеклист за EU AI Act</h3>
-                    <p class="text-xs text-slate-400 leading-relaxed">Правен пътеводител за избягуване на софтуерни глоби и правилно категоризиране на рисковете в ЕС.</p>
+
+                <!-- Bonus 3 -->
+                <div class="p-6 rounded-2xl bg-slate-900 border border-slate-800 space-y-4 flex flex-col justify-between">
+                    <div class="space-y-3">
+                        <span class="text-amber-400 font-bold text-xs">БОНУС #3 (€30 Стойност)</span>
+                        <h3 class="font-bold text-base">Чеклист за EU AI Act</h3>
+                        <p class="text-xs text-slate-400 leading-relaxed">Правен пътеводител за избягуване на софтуерни глоби и правилно категоризиране на рисковете в ЕС.</p>
+                    </div>
+                    <button onclick="testDownload('eu-ai-act-checklist.pdf')" class="w-full py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold transition-all flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-download"></i> Изтегли Бонус #3 (PDF)
+                    </button>
                 </div>
             </div>
         </div>
@@ -316,7 +336,7 @@
                             <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-400"></i> <b>Prompt Studio</b> (Интерактивен генератор)</li>
                             <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-400"></i> <b>AI Консултант на живо</b></li>
                             <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-400"></i> База с <b>35+ готови бизнес промпта</b></li>
-                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-400"></i> <b>3 Ексклузивни Бонуса</b> (Пут планер, Make, EU AI Act)</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-400"></i> <b>3 Ексклузивни Бонуса</b> (С бутони за тест)</li>
                         </ul>
                     </div>
                     <a href="https://aninav-studio.github.io/ai-guide/" class="w-full py-4 rounded-xl gradient-bg text-white font-extrabold text-xs text-center shadow-xl hover:opacity-90 transition-all transform active:scale-95 flex items-center justify-center gap-2">
@@ -369,7 +389,7 @@
                 <div class="w-12 h-12 rounded-2xl bg-amber-500/20 text-amber-400 flex items-center justify-center mx-auto text-xl font-bold">
                     <i class="fa-solid fa-calendar-days"></i>
                 </div>
-                <h3 class="text-xl font-bold">Свали Безплатния Дейли Таск Планер (PDF)</h3>
+                <h3 class="text-xl font-bold">Свали Безплатния Дейли Таск Планер</h3>
                 <p class="text-xs text-slate-400">10-минутен одит: Готов ли е твоят бизнес за автоматизация с изкуствен интелект?</p>
             </div>
 
@@ -383,7 +403,7 @@
                     <input type="email" id="leadEmail" required placeholder="ivan@company.bg" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-xs text-white focus:outline-none focus:border-blue-500">
                 </div>
                 <button type="submit" class="w-full py-3 rounded-xl gradient-bg text-white font-bold text-xs shadow-lg hover:opacity-90 transition-all">
-                    Свали Планера (PDF)
+                    Свали Планера Веднага (PDF)
                 </button>
             </form>
             <p class="text-[10px] text-slate-500 text-center">Гарантирана защита на данните. Без спам.</p>
@@ -398,24 +418,44 @@
     <script>
         function openLeadModal() { document.getElementById('leadModal').classList.remove('hidden'); }
         function closeLeadModal() { document.getElementById('leadModal').classList.add('hidden'); }
+        
+        // Тестване на свалянето на бонусите
+        function testDownload(filename) {
+            const msg = document.createElement('div');
+            msg.className = 'fixed bottom-5 right-5 bg-blue-600 text-white p-4 rounded-xl shadow-2xl z-50 text-xs font-bold flex items-center gap-2 animate-bounce';
+            msg.innerHTML = `<i class="fa-solid fa-download text-lg"></i> Тестов режим: Изтегляне на ${filename}...`;
+            document.body.appendChild(msg);
+            setTimeout(() => msg.remove(), 4000);
+
+            const link = document.createElement('a');
+            link.href = filename;
+            link.download = filename;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
         function handleLeadSubmit(e) {
             e.preventDefault();
             const nameField = document.getElementById('leadName');
             const name = nameField ? nameField.value : 'Приятел';
             const email = document.getElementById('leadEmail').value;
+            
             const msg = document.createElement('div');
             msg.className = 'fixed bottom-5 right-5 bg-emerald-600 text-white p-4 rounded-xl shadow-2xl z-50 text-xs font-bold flex items-center gap-2';
-            msg.innerHTML = `<i class="fa-solid fa-circle-check text-lg"></i> Благодарим ти, ${name}! Дейли Таск Планерът (PDF) е изпратен на ${email}.`;
+            msg.innerHTML = `<i class="fa-solid fa-circle-check text-lg"></i> Успешно, ${name}! Изтеглянето стартира.`;
             document.body.appendChild(msg);
-            setTimeout(() => msg.remove(), 4000);
+            setTimeout(() => msg.remove(), 5000);
             closeLeadModal();
+
+            const pdfUrl = 'daily-task-planner.pdf'; 
+            const link = document.createElement('a');
+            link.href = pdfUrl;
+            link.download = 'daily-task-planner.pdf';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
         }
     </script>
 </body>
 </html>
-```eof
-
-### Какво е проверено и добавено:
-1. **Бонусите (€90 обща стойност):** Всичките 3 бонуса са изписани ясно с акцент в секцията за преглед на пакетите и в специалната секция за подаръци (Дейли Таск Планер, Make.com Автоматизации и Чеклист за EU AI Act).
-2. **PDF наръчник / Дейли Таск Планер:** Изрично е упоменато в попап формата и в описанието, че планерът се предоставя в удобен **PDF формат** за мигновено сваляне.
-3. **Тон на гласа:** Изцяло на приятелско **"ти"**.
