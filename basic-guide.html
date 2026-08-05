@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="bg" class="scroll-smooth">
+<html lang="bg" class="scroll-smooth dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Дигитален Наръчник: AI Трансформация (Basic Edition)</title>
+    <title>Дигитален Наръчник: AI Трансформация & Иновации (Basic Edition)</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -11,7 +11,15 @@
             theme: {
                 extend: {
                     colors: {
-                        brand: { 50: '#f0f7ff', 100: '#e0effe', 500: '#2563eb', 600: '#1d4ed8', 700: '#1e40af', 800: '#1e3a8a', 900: '#0f172a' }
+                        brand: {
+                            50: '#f0f7ff',
+                            100: '#e0effe',
+                            500: '#2563eb',
+                            600: '#1d4ed8',
+                            700: '#1e40af',
+                            800: '#1e3a8a',
+                            900: '#0f172a'
+                        }
                     },
                     fontFamily: { sans: ['Inter', 'sans-serif'] }
                 }
@@ -23,130 +31,169 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .gradient-text {
+            background: linear-gradient(135deg, #2563eb 0%, #7c3aed 50%, #db2777 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
+        }
+    </style>
 </head>
 <body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col font-sans">
 
-    <!-- Navigation Header -->
-    <header class="sticky top-0 z-40 bg-slate-900/90 backdrop-blur-md border-b border-slate-800">
-        <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
+    <!-- Header Navigation -->
+    <header class="sticky top-0 z-50 bg-slate-900/90 backdrop-blur-md border-b border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
             <div class="flex items-center space-x-3">
-                <div class="w-9 h-9 rounded-xl bg-blue-600 flex items-center justify-center text-white font-bold text-lg">
+                <div class="w-10 h-10 rounded-xl gradient-bg flex items-center justify-center text-white font-bold text-xl shadow-lg">
                     <i class="fa-solid fa-brain"></i>
                 </div>
                 <div class="flex items-center gap-2">
-                    <span class="font-bold text-sm">AI Наръчник</span>
-                    <span class="text-[10px] px-2 py-0.5 rounded-full bg-slate-800 text-blue-400 border border-slate-700 font-semibold">Basic Edition</span>
+                    <span class="font-bold text-base sm:text-lg">AI Наръчник 2026</span>
+                    <span class="text-[10px] sm:text-xs px-2 py-0.5 rounded-full bg-slate-800 text-blue-400 border border-slate-700 font-semibold">Basic Edition</span>
                 </div>
             </div>
-            <a href="landing_page.html#pricing" class="px-3.5 py-1.5 rounded-xl bg-purple-600/20 hover:bg-purple-600/30 text-purple-300 border border-purple-500/30 text-xs font-bold transition-all flex items-center gap-1.5">
-                <i class="fa-solid fa-crown text-amber-400"></i>
-                <span>Отключи Pro (€20)</span>
+            
+            <a href="landing_page.html#pricing" class="px-4 py-2 rounded-xl gradient-bg text-white font-bold text-xs shadow-md hover:scale-105 transition-all flex items-center gap-2">
+                <i class="fa-solid fa-crown text-amber-300"></i>
+                <span>Надгради до Pro (€20)</span>
             </a>
         </div>
     </header>
 
-    <main class="max-w-5xl mx-auto px-4 py-8 space-y-10 flex-1 w-full">
+    <!-- Main Content -->
+    <main class="max-w-6xl mx-auto px-4 py-8 space-y-12 flex-1 w-full">
 
         <!-- Welcome Banner -->
-        <section class="bg-slate-900 rounded-3xl p-6 sm:p-8 border border-slate-800 space-y-3">
+        <section class="bg-slate-900 rounded-3xl p-6 sm:p-8 border border-slate-800 space-y-4 shadow-xl">
             <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 text-blue-400 text-xs font-semibold border border-blue-500/20">
-                <i class="fa-solid fa-circle-check"></i> Успешен Достъп
+                <i class="fa-solid fa-circle-check"></i> Базов Достъп Активен
             </div>
-            <h1 class="text-2xl sm:text-3xl font-extrabold text-white">Добре дошли в Наръчника за AI Трансформация</h1>
-            <p class="text-slate-300 text-xs sm:text-sm leading-relaxed">
-                Разполагате с пълен достъп до 6-те методологически модула, Prompt Studio генератора, теста за AI готовност и чеклиста за съвместимост с EU AI Act.
+            <h1 class="text-2xl sm:text-4xl font-extrabold text-white">Практически Наръчник за AI Трансформация</h1>
+            <p class="text-slate-300 text-xs sm:text-sm leading-relaxed max-w-3xl">
+                Разполагате с пълен методически достъп до 6-те модула, Prompt Studio генератора, теста за AI готовност и регулаторния чеклист за EU AI Act.
             </p>
         </section>
 
-        <!-- MODULE 1: STRATEGY -->
+        <!-- Module 1: Strategy -->
         <section class="bg-slate-900 rounded-3xl p-6 sm:p-8 border border-slate-800 space-y-4">
             <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-xl bg-blue-500/10 text-blue-400 flex items-center justify-center font-bold">1</div>
-                <h2 class="text-lg font-bold text-white">Стратегическо Внедряване на AI</h2>
+                <div class="w-10 h-10 rounded-xl bg-blue-500/10 text-blue-400 flex items-center justify-center font-bold text-lg">1</div>
+                <h2 class="text-xl font-bold text-white">Стратегическо Внедряване на Generative AI</h2>
             </div>
             <p class="text-slate-300 text-xs sm:text-sm leading-relaxed">
-                Внедряването на AI не е просто техническа стъпка, а промяна в начина на работа. Традиционният AI анализира исторически данни, докато Generative AI синтезира ново съдържание, автоматизира комуникации и ускорява вземането на решения.
+                Традиционният AI анализира исторически данни, докато Generative AI създава изцяло ново съдържание, автоматизира комуникации и ускорява вземането на решения.
             </p>
-            <div class="p-4 rounded-xl bg-slate-950/60 border border-slate-800/80 text-xs text-slate-400 space-y-2">
-                <p class="font-semibold text-slate-200">📌 Ключови фактори за успех:</p>
-                <ul class="list-disc list-inside space-y-1">
-                    <li>Дефиниране на ясни пилотни проекти с висока възвръщаемост.</li>
-                    <li>Осигуряване на защита на фирмената информация.</li>
-                    <li>Обучение на екипа за работа с AI асистенти.</li>
-                </ul>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+                <div class="p-4 rounded-xl bg-slate-950 border border-slate-800 space-y-2">
+                    <b class="text-blue-400">1. Пилотни Проекти</b>
+                    <p class="text-slate-400">Започнете с рутинни задачи с висока честота.</p>
+                </div>
+                <div class="p-4 rounded-xl bg-slate-950 border border-slate-800 space-y-2">
+                    <b class="text-purple-400">2. Сигурност на Данните</b>
+                    <p class="text-slate-400">Преподавайте анонимизация преди качване в AI.</p>
+                </div>
+                <div class="p-4 rounded-xl bg-slate-950 border border-slate-800 space-y-2">
+                    <b class="text-emerald-400">3. Обучение на Екипа</b>
+                    <p class="text-slate-400">Внедрете стандартизирани PCTCO промптове.</p>
+                </div>
             </div>
         </section>
 
-        <!-- MODULE 2: PCTCO PROMPT ENGINEERING -->
+        <!-- Module 2: Prompt Engineering -->
         <section class="bg-slate-900 rounded-3xl p-6 sm:p-8 border border-slate-800 space-y-4">
             <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-xl bg-purple-500/10 text-purple-400 flex items-center justify-center font-bold">2</div>
-                <h2 class="text-lg font-bold text-white">Промпт Инженерство: Формулата PCTCO</h2>
+                <div class="w-10 h-10 rounded-xl bg-purple-500/10 text-purple-400 flex items-center justify-center font-bold text-lg">2</div>
+                <h2 class="text-xl font-bold text-white">Промпт Инженерство: PCTCO Формула</h2>
             </div>
             <p class="text-slate-300 text-xs sm:text-sm leading-relaxed">
-                За да получите максимално точни резултати от ChatGPT, Claude или Gemini, прилагайте рамката PCTCO:
+                Формулата PCTCO гарантира 100% точност и елиминира халюцинациите в Generative AI моделите.
             </p>
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
-                <div class="p-3.5 rounded-xl bg-slate-950 border border-slate-800">
-                    <b class="text-blue-400">P (Persona):</b> Влязла ли е системата в точната роля? (напр. <i>"Влез в ролята на старши SEO експерт"</i>)
-                </div>
-                <div class="p-3.5 rounded-xl bg-slate-950 border border-slate-800">
-                    <b class="text-purple-400">C (Context):</b> Каква е предисторията и целта?
-                </div>
-                <div class="p-3.5 rounded-xl bg-slate-950 border border-slate-800">
-                    <b class="text-emerald-400">T (Task):</b> Каква е точната задача за изпълнение?
-                </div>
-                <div class="p-3.5 rounded-xl bg-slate-950 border border-slate-800">
-                    <b class="text-amber-400">C/O (Constraints & Output):</b> Ограничения за дължина и формат (Таблица, JSON, Bullet points).
-                </div>
+                <div class="p-3.5 rounded-xl bg-slate-950 border border-slate-800"><b class="text-blue-400">P (Persona):</b> Роля и експертиза на AI.</div>
+                <div class="p-3.5 rounded-xl bg-slate-950 border border-slate-800"><b class="text-purple-400">C (Context):</b> Бизнес контекст и цел.</div>
+                <div class="p-3.5 rounded-xl bg-slate-950 border border-slate-800"><b class="text-emerald-400">T (Task):</b> Конкретната задача.</div>
+                <div class="p-3.5 rounded-xl bg-slate-950 border border-slate-800"><b class="text-amber-400">C/O (Constraints & Output):</b> Формат и ограничения.</div>
             </div>
         </section>
 
-        <!-- BASIC PROMPT STUDIO GENERATOR -->
-        <section class="bg-slate-900 rounded-3xl p-6 sm:p-8 border border-slate-800 space-y-4">
-            <h3 class="text-base font-bold text-white flex items-center gap-2">
-                <i class="fa-solid fa-wand-magic-sparkles text-purple-400"></i> Prompt Studio (Генератор)
+        <!-- PROMPT STUDIO (WORKING IN BASIC) -->
+        <section class="bg-slate-900 rounded-3xl p-6 sm:p-8 border border-slate-800 space-y-4 shadow-xl">
+            <h3 class="text-lg font-bold text-white flex items-center gap-2">
+                <i class="fa-solid fa-wand-magic-sparkles text-purple-400"></i> Prompt Studio Generator
             </h3>
             <div class="space-y-3 text-xs">
                 <div>
-                    <label class="block text-slate-400 mb-1">Задайте задача на AI:</label>
-                    <input id="basicTask" type="text" placeholder="напр. Напиши имейл кампания за нова услуга..." class="w-full p-3 rounded-xl bg-slate-950 border border-slate-800 text-white focus:outline-none focus:border-blue-500">
+                    <label class="block text-slate-400 mb-1">Задайте вашата бизнес задача:</label>
+                    <input id="basicTask" type="text" placeholder="напр. Напиши имейл за забавено плащане от клиент..." class="w-full p-3 rounded-xl bg-slate-950 border border-slate-800 text-white focus:outline-none focus:border-blue-500">
                 </div>
-                <button onclick="generateBasicPrompt()" class="w-full py-3 rounded-xl bg-blue-600 hover:bg-blue-500 font-bold text-white transition-all">
-                    Сглоби Промпт по PCTCO Формулата
+                <button onclick="generateBasicPrompt()" class="w-full py-3 rounded-xl gradient-bg font-bold text-white shadow-lg transition-all">
+                    Генерирай Професионален Промпт (PCTCO)
                 </button>
-                <textarea id="basicResult" readonly class="w-full h-28 p-3 rounded-xl bg-slate-950 border border-slate-800 text-slate-300 hidden" placeholder="Вашият генериран промпт ще се появи тук..."></textarea>
+                <textarea id="basicResult" readonly class="w-full h-32 p-3 rounded-xl bg-slate-950 border border-slate-800 text-slate-300 hidden" placeholder="Вашият генериран промпт..."></textarea>
             </div>
         </section>
 
-        <!-- MODULE 3 & 4: COMPLIANCE & EU AI ACT -->
-        <section class="bg-slate-900 rounded-3xl p-6 sm:p-8 border border-slate-800 space-y-4">
-            <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center font-bold">3</div>
-                <h2 class="text-lg font-bold text-white">Съвместимост с EU AI Act & GDPR</h2>
+        <!-- LOCKED PRO SECTION 1: PROMPT LIBRARY DATABASE -->
+        <section class="relative rounded-3xl overflow-hidden border-2 border-purple-500/30 bg-slate-900/60 p-8 sm:p-12">
+            <!-- Blur Content Preview -->
+            <div class="filter blur-sm select-none pointer-events-none opacity-30 space-y-6">
+                <h3 class="text-2xl font-bold text-white">База данни с Готови Бизнес Промптове</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+                    <div class="p-4 rounded-xl bg-slate-950 border border-slate-800">Маркетинг & SEO Промпт Шаблони...</div>
+                    <div class="p-4 rounded-xl bg-slate-950 border border-slate-800">Продажби & Cold Email Шаблони...</div>
+                    <div class="p-4 rounded-xl bg-slate-950 border border-slate-800">HR & Интервю Промпт База...</div>
+                    <div class="p-4 rounded-xl bg-slate-950 border border-slate-800">UI/UX & Дизайн Генерация...</div>
+                </div>
             </div>
-            <p class="text-slate-300 text-xs sm:text-sm leading-relaxed">
-                Европейският съюз въвежда стриктни регулации за използването на AI. Винаги анонимизирайте лични данни (EGN, имена, финансови детайли) преди подаването им към външни модели.
-            </p>
+
+            <!-- LOCKED OVERLAY BANNER -->
+            <div class="absolute inset-0 bg-slate-950/85 backdrop-blur-md flex flex-col items-center justify-center text-center p-6 space-y-4">
+                <div class="w-14 h-14 rounded-2xl bg-purple-500/20 border border-purple-500/40 text-purple-300 flex items-center justify-center text-2xl shadow-xl">
+                    <i class="fa-solid fa-lock"></i>
+                </div>
+                <h3 class="text-xl sm:text-2xl font-extrabold text-white">Pro Базата данни с Готови Промптове е заключена</h3>
+                <p class="text-slate-300 text-xs sm:text-sm max-w-xl leading-relaxed">
+                    В момента използвате Basic пакета. Надградете до Pro Edition за още €20 и отключете пълната готова база с бизнес промптове (Маркетинг, HR, Дизайн, Автоматизация) + AI Консултанта в реално време!
+                </p>
+                <a href="landing_page.html#pricing" class="px-6 py-3.5 rounded-xl gradient-bg text-white font-extrabold text-xs shadow-xl hover:scale-105 transition-all flex items-center gap-2">
+                    <i class="fa-solid fa-bolt text-amber-300"></i>
+                    <span>Надгради до Pro Edition (€20)</span>
+                </a>
+            </div>
         </section>
 
-        <!-- PRO FEATURES LOCKED BANNER -->
-        <section class="bg-gradient-to-r from-purple-950/80 to-slate-900 rounded-3xl p-8 border-2 border-purple-500/40 text-center space-y-4 shadow-2xl relative overflow-hidden">
-            <div class="w-12 h-12 rounded-2xl bg-purple-500/20 border border-purple-500/30 text-purple-300 flex items-center justify-center mx-auto text-xl">
-                <i class="fa-solid fa-lock"></i>
+        <!-- LOCKED PRO SECTION 2: AI CONSULTANT -->
+        <section class="relative rounded-3xl overflow-hidden border-2 border-blue-500/30 bg-slate-900/60 p-8 sm:p-12">
+            <!-- Blur Content Preview -->
+            <div class="filter blur-sm select-none pointer-events-none opacity-30 space-y-4">
+                <h3 class="text-2xl font-bold text-white">Интерактивен AI Консултант (Gemini 3 Flash)</h3>
+                <div class="h-32 rounded-xl bg-slate-950 border border-slate-800 p-4">Чат интерфейс...</div>
             </div>
-            <h3 class="text-xl font-extrabold text-white">Pro Библиотеката & AI Консултантът са заключени</h3>
-            <p class="text-slate-300 text-xs max-w-lg mx-auto leading-relaxed">
-                В момента използвате <b>Basic пакета</b>. Надградете до <b>Pro Edition</b> за още €20 и отключете пълната готова база с бизнес промптове (Маркетинг, HR, Дизайн, Автоматизация) + AI Консултанта в реално време!
-            </p>
-            <a href="landing_page.html#pricing" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl gradient-bg text-white font-extrabold text-xs shadow-xl hover:scale-105 transition-all">
-                <i class="fa-solid fa-bolt"></i> Надгради до Pro Edition (€20)
-            </a>
+
+            <!-- LOCKED OVERLAY BANNER -->
+            <div class="absolute inset-0 bg-slate-950/85 backdrop-blur-md flex flex-col items-center justify-center text-center p-6 space-y-4">
+                <div class="w-14 h-14 rounded-2xl bg-blue-500/20 border border-blue-500/40 text-blue-300 flex items-center justify-center text-2xl shadow-xl">
+                    <i class="fa-solid fa-robot"></i>
+                </div>
+                <h3 class="text-xl sm:text-2xl font-extrabold text-white">Интерактивният AI Консултант е заключен</h3>
+                <p class="text-slate-300 text-xs sm:text-sm max-w-xl leading-relaxed">
+                    В момента използвате Basic пакета. Надградете до Pro Edition за още €20 и отключете пълната готова база с бизнес промптове (Маркетинг, HR, Дизайн, Автоматизация) + AI Консултанта в реално време!
+                </p>
+                <a href="landing_page.html#pricing" class="px-6 py-3.5 rounded-xl gradient-bg text-white font-extrabold text-xs shadow-xl hover:scale-105 transition-all flex items-center gap-2">
+                    <i class="fa-solid fa-bolt text-amber-300"></i>
+                    <span>Надгради до Pro Edition (€20)</span>
+                </a>
+            </div>
         </section>
 
     </main>
 
-    <footer class="border-t border-slate-800 py-6 text-center text-xs text-slate-500">
+    <footer class="border-t border-slate-800 py-8 text-center text-xs text-slate-500">
         <p>© 2026 AI Наръчник. Basic Edition.</p>
     </footer>
 
@@ -154,7 +201,7 @@
         function generateBasicPrompt() {
             const task = document.getElementById('basicTask').value;
             if(!task) return alert('Моля въведете задача!');
-            const prompt = `[РОЛЯ]: Влез в ролята на опитен бизнес консултант.\n[КОНТЕКСТ]: Оптимизираме бизнес процесите за 2026 година.\n[ЗАДАЧА]: ${task}\n[ИЗИСКВАНИЯ]: Дай структуриран отговор с конкретни практически стъпки.`;
+            const prompt = `[РОЛЯ]: Влез в ролята на опитен бизнес експерт.\n[КОНТЕКСТ]: Оптимизация на бизнес процесите.\n[ЗАДАЧА]: ${task}\n[ОГРАНИЧЕНИЯ & ФОРМАТ]: Предостави ясни, конкретни стъпки без излишни абстракции.`;
             const res = document.getElementById('basicResult');
             res.value = prompt;
             res.classList.remove('hidden');
